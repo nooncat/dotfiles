@@ -25,4 +25,23 @@ set smarttab
 set expandtab
 set smartindent
 
+set keymap=russian-jcukenwin
+set iminsert=0
+set imsearch=0
 
+cmap <silent> <C-F> <C-^>
+imap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
+nmap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
+vmap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
+
+function MyKeyMapHighlight()
+  if &iminsert == 0
+    hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
+  else
+    hi StatusLine ctermfg=DarkRed guifg=DarkRed
+  endif
+endfunction
+
+set fileencoding=utf-8
+set encoding=utf-8
+set termencoding=utf-8
