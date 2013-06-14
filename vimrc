@@ -45,3 +45,18 @@ endfunction
 set fileencoding=utf-8
 set encoding=utf-8
 set termencoding=utf-8
+
+imap <C-c>b <Esc>:ConqueTermSplit bash<CR>
+nmap <C-c>b :ConqueTermSplit bash<CR>
+let g:ConqueTerm_InsertOnEnter = 0
+let g:ConqueTerm_ReadUnfocused = 1
+
+function! Tab_Or_Complete()
+  if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+    return "\<C-N>"
+  else
+    return "\<Tab>"
+  endif
+endfunction
+:inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+:set dictionary="/usr/dict/words"
