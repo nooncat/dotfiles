@@ -1,3 +1,5 @@
+imap >Ins> <Esc>i
+
 vnoremap < <gv
 vnoremap > >gv
 
@@ -46,8 +48,8 @@ set fileencoding=utf-8
 set encoding=utf-8
 set termencoding=utf-8
 
-imap <C-c>b <Esc>:ConqueTermSplit bash<CR>
-nmap <C-c>b :ConqueTermSplit bash<CR>
+imap <C-c>b <Esc>:ConqueTerm bash<CR>
+nmap <C-c>b :ConqueTerm bash<CR>
 let g:ConqueTerm_InsertOnEnter = 0
 let g:ConqueTerm_ReadUnfocused = 1
 
@@ -58,5 +60,10 @@ function! Tab_Or_Complete()
     return "\<Tab>"
   endif
 endfunction
-:inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
-:set dictionary="/usr/dict/words"
+inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+set dictionary="/usr/share/dict/british-english-small"
+set complete ""
+set complete+=.
+set complete+=k
+set complete+=b
+set complete+=t
