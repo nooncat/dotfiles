@@ -1,3 +1,5 @@
+execute pathogen#infect()
+
 imap >Ins> <Esc>i
 
 vnoremap < <gv
