@@ -17,8 +17,8 @@ imap <F6> <Esc> :tabnext <CR>
 map <F6> :tabnext <CR>
 
 autocmd VimEnter * NERDTree
-
 autocmd BufEnter * NERDTreeTabsOpen
+let NERDTreeWinSize=23
 
 set undofile
 set undodir=~/.vim/undo/
