@@ -18,7 +18,7 @@ map <F6> :tabnext <CR>
 
 autocmd VimEnter * NERDTree
 autocmd BufEnter * NERDTreeTabsOpen
-let NERDTreeWinSize=23
+let NERDTreeWinSize=19
 
 set undofile
 set undodir=~/.vim/undo/
