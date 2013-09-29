@@ -2,8 +2,8 @@ execute pathogen#infect()
 
 set number
 
-syntax enable
-set t_Co=16
+"syntax enable
+"set t_Co=16
 colorscheme solarized
 
 imap >Ins> <Esc>i
