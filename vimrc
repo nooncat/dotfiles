@@ -1,11 +1,15 @@
 execute pathogen#infect()
 
+set number
+
+syntax enable
+set t_Co=16
+colorscheme solarized
+
 imap >Ins> <Esc>i
 
 vnoremap < <gv
 vnoremap > >gv
-
-map <F2> :NERDTreeToggle<CR>
 
 imap <F4> <Esc>:browse tabnew<CR>
 map <F4> <Esc>:browse tabnew<CR>
@@ -18,7 +22,7 @@ map <F6> :tabnext <CR>
 
 autocmd VimEnter * NERDTree
 autocmd BufEnter * NERDTreeTabsOpen
-let NERDTreeWinSize=19
+let NERDTreeWinSize=15
 
 set undofile
 set undodir=~/.vim/undo/
