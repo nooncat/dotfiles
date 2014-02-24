@@ -1,28 +1,48 @@
 execute pathogen#infect()
 
+set scrolloff=4 
 set number
-
-"syntax enable
-"set t_Co=16
+set visualbell
+set nobackup
+set noswapfile
+set showcmd
 colorscheme solarized
+
+"set autoread
+
+set nocompatible
+syntax on
+filetype on
+filetype indent on
+filetype plugin on
+
+"set t_Co=16
 
 imap >Ins> <Esc>i
 
-vnoremap < <gv
-vnoremap > >gv
+vmap < <gv
+vmap > >gv
 
-imap <F4> <Esc>:browse tabnew<CR>
-map <F4> <Esc>:browse tabnew<CR>
+function! ResCur()
+  if line("'\"") <= line("$")
+    normal!  g'"
+    return 1
+  endif
+endfunction
+augroup ResCur
+  autocmd!
+  autocmd BufWinEnter * call ResCur()
+augroup END
 
-imap <F5> <Esc> :tabprev <CR>
-map <F5> :tabprev <CR>
+imap <F5> <Esc> :bp <CR>
+map <F5> :bp <CR>
 
-imap <F6> <Esc> :tabnext <CR>
-map <F6> :tabnext <CR>
+imap <F6> <Esc> :bn <CR>
+map <F6> :bn <CR>
 
 autocmd VimEnter * NERDTree
-autocmd BufEnter * NERDTreeTabsOpen
 let NERDTreeWinSize=15
+let NERDTreeShowHidden=1
 
 set undofile
 set undodir=~/.vim/undo/
@@ -54,8 +74,8 @@ set fileencoding=utf-8
 set encoding=utf-8
 set termencoding=utf-8
 
-imap <C-c>b <Esc>:ConqueTerm bash<CR>
-nmap <C-c>b :ConqueTerm bash<CR>
+imap <C-c> <Esc>:ConqueTerm bash<CR>
+nmap <C-c> :ConqueTerm bash<CR>
 let g:ConqueTerm_InsertOnEnter = 0
 let g:ConqueTerm_ReadUnfocused = 1
 
@@ -66,7 +86,7 @@ function! Tab_Or_Complete()
     return "\<Tab>"
   endif
 endfunction
-inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+imap <Tab> <C-R>=Tab_Or_Complete()<CR>
 set dictionary="/usr/share/dict/british-english-small"
 set complete ""
 set complete+=.
