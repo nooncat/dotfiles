@@ -9,6 +9,7 @@ set showcmd
 colorscheme solarized
 
 "set autoread
+"set t_Co=16
 
 set nocompatible
 syntax on
@@ -16,7 +17,10 @@ filetype on
 filetype indent on
 filetype plugin on
 
-"set t_Co=16
+set hlsearch
+set incsearch
+"set nowrapscan
+set ignorecase
 
 imap >Ins> <Esc>i
 
