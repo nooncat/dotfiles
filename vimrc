@@ -9,8 +9,21 @@ set showcmd
 set hidden
 set autoread
 
+set undofile
+set undodir=~/.vim/undo/
+
+set tabstop=2
+set shiftwidth=2
+set smarttab
+set expandtab
+set smartindent
+
+set encoding=utf-8
+set fileencodings=utf-8,windows-1251
+set termencoding=utf-8
+
 set t_Co=16
-colorscheme default
+"colorscheme solarized
 "set background=light
 
 set nocompatible
@@ -66,16 +79,7 @@ endfunction
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_theme = 'simple'
-set noshowmode
-
-set undofile
-set undodir=~/.vim/undo/
-
-set tabstop=2
-set shiftwidth=2
-set smarttab
-set expandtab
-set smartindent
+"set noshowmode
 
 set keymap=russian-jcukenwin
 set iminsert=0
@@ -93,10 +97,6 @@ function MyKeyMapHighlight()
     hi StatusLine ctermfg=DarkRed guifg=DarkRed
   endif
 endfunction
-
-set fileencoding=utf-8
-set encoding=utf-8
-set termencoding=utf-8
 
 imap <C-c> <Esc>:ConqueTerm bash<CR>
 nmap <C-c> :ConqueTerm bash<CR>
