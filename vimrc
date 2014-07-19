@@ -1,16 +1,29 @@
-execute pathogen#infect()
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'pthrasher/conqueterm-vim.git'
+Plugin 'bling/vim-airline.git'
+
+call vundle#end()
+filetype plugin indent on
+
+set undofile
+set undodir=~/.vim/undo/
+set viminfo='250,h
 
 set scrolloff=4
 set number
-set visualbell
+"set visualbell
 set nobackup
 set noswapfile
 set showcmd
 set hidden
 set autoread
-
-set undofile
-set undodir=~/.vim/undo/
+syntax on
 
 set tabstop=2
 set shiftwidth=2
@@ -22,15 +35,10 @@ set encoding=utf-8
 set fileencodings=utf-8,windows-1251
 set termencoding=utf-8
 
-set t_Co=16
+set t_Co=8
 "colorscheme solarized
 "set background=light
 
-set nocompatible
-syntax on
-filetype on
-filetype indent on
-filetype plugin on
 
 set hlsearch
 set incsearch
@@ -56,10 +64,8 @@ augroup END
 
 imap <F6> <Esc> :bp <CR>
 map <F6> :bp <CR>
-
 imap <F7> <Esc> :bn <CR>
 map <F7> :bn <CR>
-
 nmap Q :b#<BAR>bd#<CR>
 
 autocmd VimEnter * NERDTree
