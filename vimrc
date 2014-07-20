@@ -5,11 +5,26 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree.git'
+"Plugin 'scrooloose/syntastic.git'
 Plugin 'pthrasher/conqueterm-vim.git'
 Plugin 'bling/vim-airline.git'
+Plugin 'altercation/vim-colors-solarized.git'
 
 call vundle#end()
 filetype plugin indent on
+
+"СЪЕШЬ ЕЩЕ ЭТИХ МЯГКИХ ФРАНЦУЗКИХ БУЛОЧЕК И ВЫПЕЙ ЧАЮ съешь еще этих мягких французких булочек и выпей чаю
+
+let g:solarized_termcolors=256
+set t_Co=256
+colorscheme solarized
+set background=dark
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_theme = 'solarized'
+set ttimeoutlen=10
+"set noshowmode
 
 set undofile
 set undodir=~/.vim/undo/
@@ -17,7 +32,6 @@ set viminfo='250,h
 
 set scrolloff=4
 set number
-"set visualbell
 set nobackup
 set noswapfile
 set showcmd
@@ -25,26 +39,33 @@ set hidden
 set autoread
 syntax on
 
+set cursorline
+set cursorcolumn
+autocmd InsertEnter * highlight CursorLine   ctermbg=233
+autocmd InsertLeave * highlight CursorLine   ctermbg=235
+autocmd InsertEnter * highlight CursorColumn ctermbg=233
+autocmd InsertLeave * highlight CursorColUmn ctermbg=235
+autocmd FileType nerdtree setlocal nocursorcolumn nocursorline
+autocmd FileType conque_term setlocal nocursorcolumn nocursorline
+
 set tabstop=2
 set shiftwidth=2
 set smarttab
 set expandtab
 set smartindent
 
+set wrap
+set linebreak
+
 set encoding=utf-8
 set fileencodings=utf-8,windows-1251
 set termencoding=utf-8
-
-set t_Co=8
-"colorscheme solarized
-"set background=light
-
 
 set hlsearch
 set incsearch
 "set nowrapscan
 set ignorecase
-nnoremap <silent> <C-l> :nohl<CR><C-l>
+nnoremap <silent> <C-l> :nohlsearch<CR><C-l>
 
 imap >Ins> <Esc>i
 
@@ -68,7 +89,10 @@ imap <F7> <Esc> :bn <CR>
 map <F7> :bn <CR>
 nmap Q :b#<BAR>bd#<CR>
 
+imap <C-w><C-w> <esc><C-w><C-w>
+
 autocmd VimEnter * NERDTree
+map <F10> :NERDTreeToggle<CR>
 let NERDTreeWinSize=15
 let NERDTreeShowHidden=0
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
@@ -82,11 +106,6 @@ function! s:CloseIfOnlyNerdTreeLeft()
   endif
 endfunction
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_theme = 'simple'
-"set noshowmode
-
 set keymap=russian-jcukenwin
 set iminsert=0
 set imsearch=0
@@ -95,7 +114,6 @@ cmap <silent> <C-F> <C-^>
 imap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
 nmap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
 vmap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
-
 function MyKeyMapHighlight()
   if &iminsert == 0
     hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
