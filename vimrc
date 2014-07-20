@@ -41,10 +41,12 @@ syntax on
 
 set cursorline
 set cursorcolumn
+highlight CursorLine   ctermbg=236
+highlight CursorColumn ctermbg=236
 autocmd InsertEnter * highlight CursorLine   ctermbg=233
-autocmd InsertLeave * highlight CursorLine   ctermbg=235
+autocmd InsertLeave * highlight CursorLine   ctermbg=236
 autocmd InsertEnter * highlight CursorColumn ctermbg=233
-autocmd InsertLeave * highlight CursorColUmn ctermbg=235
+autocmd InsertLeave * highlight CursorColUmn ctermbg=236
 autocmd FileType nerdtree setlocal nocursorcolumn nocursorline
 autocmd FileType conque_term setlocal nocursorcolumn nocursorline
 
