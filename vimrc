@@ -26,9 +26,10 @@ let g:airline_theme = 'solarized'
 set ttimeoutlen=10
 "set noshowmode
 
+let SessionLoad = 1
+
 set undofile
 set undodir=~/.vim/undo/
-set viminfo='250,h
 
 set scrolloff=4
 set number
@@ -47,8 +48,13 @@ autocmd InsertEnter * highlight CursorLine   ctermbg=233
 autocmd InsertLeave * highlight CursorLine   ctermbg=236
 autocmd InsertEnter * highlight CursorColumn ctermbg=233
 autocmd InsertLeave * highlight CursorColUmn ctermbg=236
-autocmd FileType nerdtree setlocal nocursorcolumn nocursorline
+autocmd FileType nerdtree setlocal nocursorcolumn
 autocmd FileType conque_term setlocal nocursorcolumn nocursorline
+augroup NerdCursor
+  autocmd!
+  autocmd BufEnter NERD_tree_* setlocal cursorline
+  autocmd BufLeave NERD_tree_* setlocal nocursorline
+augroup END
 
 set tabstop=2
 set shiftwidth=2
@@ -74,6 +80,7 @@ imap >Ins> <Esc>i
 vmap < <gv
 vmap > >gv
 
+set viminfo='250,h
 function! ResCur()
   if line("'\"") <= line("$")
     normal!  g'"
@@ -95,7 +102,7 @@ imap <C-w><C-w> <esc><C-w><C-w>
 
 autocmd VimEnter * NERDTree
 map <F10> :NERDTreeToggle<CR>
-let NERDTreeWinSize=15
+let NERDTreeWinSize=25
 let NERDTreeShowHidden=0
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 function! s:CloseIfOnlyNerdTreeLeft()
