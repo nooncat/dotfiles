@@ -4,11 +4,12 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-Plugin 'scrooloose/nerdtree.git'
-"Plugin 'scrooloose/syntastic.git'
-Plugin 'pthrasher/conqueterm-vim.git'
-Plugin 'bling/vim-airline.git'
-Plugin 'altercation/vim-colors-solarized.git'
+Plugin 'scrooloose/nerdtree'
+"Plugin 'scrooloose/syntastic'
+"Plugin 'pthrasher/conqueterm-vim'
+Plugin 'bling/vim-airline'
+Plugin 'oplatek/Conque-Shell'
+Plugin 'altercation/vim-colors-solarized'
 
 call vundle#end()
 filetype plugin indent on
@@ -22,11 +23,9 @@ set background=dark
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_theme = 'solarized'
+"let g:airline_theme = 'luna'
 set ttimeoutlen=10
 "set noshowmode
-
-let SessionLoad = 1
 
 set undofile
 set undodir=~/.vim/undo/
@@ -39,6 +38,7 @@ set showcmd
 set hidden
 set autoread
 syntax on
+set novisualbell
 
 set cursorline
 set cursorcolumn
@@ -54,6 +54,8 @@ augroup NerdCursor
   autocmd!
   autocmd BufEnter NERD_tree_* setlocal cursorline
   autocmd BufLeave NERD_tree_* setlocal nocursorline
+  autocmd BufEnter *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee setlocal cursorline cursorcolumn
+  autocmd BufLeave *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee setlocal nocursorline nocursorcolumn
 augroup END
 
 set tabstop=2
@@ -64,6 +66,7 @@ set smartindent
 
 set wrap
 set linebreak
+set colorcolumn=81
 
 set encoding=utf-8
 set fileencodings=utf-8,windows-1251
@@ -73,7 +76,7 @@ set hlsearch
 set incsearch
 "set nowrapscan
 set ignorecase
-nnoremap <silent> <C-l> :nohlsearch<CR><C-l>
+nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
 imap >Ins> <Esc>i
 
@@ -98,11 +101,9 @@ imap <F7> <Esc> :bn <CR>
 map <F7> :bn <CR>
 nmap Q :b#<BAR>bd#<CR>
 
-imap <C-w><C-w> <esc><C-w><C-w>
-
 autocmd VimEnter * NERDTree
 map <F10> :NERDTreeToggle<CR>
-let NERDTreeWinSize=25
+let NERDTreeWinSize=20
 let NERDTreeShowHidden=0
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 function! s:CloseIfOnlyNerdTreeLeft()
@@ -119,10 +120,10 @@ set keymap=russian-jcukenwin
 set iminsert=0
 set imsearch=0
 
-cmap <silent> <C-F> <C-^>
-imap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
-nmap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
-vmap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
+cmap <silent> <C-A> <C-^>
+imap <silent> <C-A> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
+nmap <silent> <C-A> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
+vmap <silent> <C-A> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
 function MyKeyMapHighlight()
   if &iminsert == 0
     hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
@@ -131,11 +132,13 @@ function MyKeyMapHighlight()
   endif
 endfunction
 
+imap <C-w><C-w> <esc><C-w><C-w>
+
 imap <C-c> <Esc>:ConqueTerm bash<CR>
 nmap <C-c> :ConqueTerm bash<CR>
-let g:ConqueTerm_InsertOnEnter = 0
+let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_ReadUnfocused = 1
-let g:ConqueTerm_CWInsert = 1
+let g:ConqueTerm_CWInsert = 0
 "let g:ConqueTerm_Color = 1
 
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
