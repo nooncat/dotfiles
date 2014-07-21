@@ -66,7 +66,7 @@ set smartindent
 
 set wrap
 set linebreak
-set colorcolumn=81
+let &colorcolumn=join(range(81,999),",")
 
 set encoding=utf-8
 set fileencodings=utf-8,windows-1251
