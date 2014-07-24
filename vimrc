@@ -27,7 +27,7 @@ set ttimeoutlen=10
 "set noshowmode
 
 let g:syntastic_enable_signs=1
-"let g:syntastic_always_populate_lock_list=1
+let g:syntastic_always_populate_lock_list=1
 let g:syntastic_aggregate_errors=1
 
 set undofile
@@ -70,10 +70,11 @@ set expandtab
 set smarttab
 set smartindent
 
+set wrap
 set linebreak
 let &colorcolumn=join(range(81,999),",")
 "set breakindent
-"set showbreak=\ \ " comment  so that the whitespace work >.>
+set showbreak=\ \ " comment  so that the whitespace work >.>
 "set splitright
 
 set encoding=utf-8
