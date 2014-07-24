@@ -5,8 +5,7 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
-"Plugin 'scrooloose/syntastic'
-"Plugin 'pthrasher/conqueterm-vim'
+Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 Plugin 'oplatek/Conque-Shell'
 Plugin 'altercation/vim-colors-solarized'
@@ -27,6 +26,10 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 set ttimeoutlen=10
 "set noshowmode
 
+let g:syntastic_enable_signs=1
+"let g:syntastic_always_populate_lock_list=1
+let g:syntastic_aggregate_errors=1
+
 set undofile
 set undodir=~/.vim/undo/
 
@@ -39,6 +42,9 @@ set hidden
 set autoread
 syntax on
 set novisualbell
+
+set wildmenu
+set wildmode=list:longest
 
 set cursorline
 set cursorcolumn
@@ -54,19 +60,21 @@ augroup NerdCursor
   autocmd!
   autocmd BufEnter NERD_tree_* setlocal cursorline
   autocmd BufLeave NERD_tree_* setlocal nocursorline
-  autocmd BufEnter *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee setlocal cursorline cursorcolumn
-  autocmd BufLeave *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee setlocal nocursorline nocursorcolumn
+  autocmd BufEnter *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee,*.txt setlocal cursorline cursorcolumn
+  autocmd BufLeave *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee,*.txt setlocal nocursorline nocursorcolumn
 augroup END
 
 set tabstop=2
 set shiftwidth=2
-set smarttab
 set expandtab
+set smarttab
 set smartindent
 
-set wrap
 set linebreak
 let &colorcolumn=join(range(81,999),",")
+"set breakindent
+"set showbreak=\ \ " comment  so that the whitespace work >.>
+"set splitright
 
 set encoding=utf-8
 set fileencodings=utf-8,windows-1251
@@ -141,7 +149,17 @@ let g:ConqueTerm_ReadUnfocused = 1
 let g:ConqueTerm_CWInsert = 0
 "let g:ConqueTerm_Color = 1
 
+function! Tab_Or_Complete()
+  if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+    return "\<C-N>"
+  else
+    return "\<Tab>"
+  endif
+endfunction
+inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+map <Esc>[Z <S-Tab>
+ounmap <Esc>[Z
+inoremap <S-Tab> <C-P>
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-imap <tab> <c-n>
