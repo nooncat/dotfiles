@@ -88,9 +88,7 @@ function! RestoreCursorPos()
 endfunction
 
 imap <F6> <Esc> :bp <CR>
-map <F6> :bp <CR>
 imap <F7> <Esc> :bn <CR>
-map <F7> :bn <CR>
 nmap Q :b#<BAR>bd#<CR>
 
 map <F10> :NERDTreeToggle<CR>
@@ -139,7 +137,7 @@ function! Tab_Or_Complete()
 endfunction
 inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 
-augroup vimrc_autocmd 
+augroup vimrc_autocmd
   autocmd!
   "cursor
   autocmd InsertEnter * highlight CursorLine   ctermbg=233
@@ -155,6 +153,12 @@ augroup vimrc_autocmd
   "NERDTree
   autocmd VimEnter * NERDTree
   autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+  autocmd BufEnter NERD_tree_* unmap <F6>
+  autocmd BufLeave NERD_tree_* map <F6> :bp <CR>
+  autocmd BufAdd * map <F6> :bp <CR>
+  autocmd BufEnter NERD_tree_* unmap <F7>
+  autocmd BufLeave NERD_tree_* map <F7> :bn <CR>
+  autocmd BufAdd * map <F7> :bn <CR>
   "RestoreCursorPos
   autocmd BufWinEnter * call RestoreCursorPos()
   "RubyComplete
