@@ -50,19 +50,6 @@ set cursorline
 set cursorcolumn
 highlight CursorLine   ctermbg=236
 highlight CursorColumn ctermbg=236
-autocmd InsertEnter * highlight CursorLine   ctermbg=233
-autocmd InsertLeave * highlight CursorLine   ctermbg=236
-autocmd InsertEnter * highlight CursorColumn ctermbg=233
-autocmd InsertLeave * highlight CursorColUmn ctermbg=236
-autocmd FileType nerdtree setlocal nocursorcolumn
-autocmd FileType conque_term setlocal nocursorcolumn nocursorline
-augroup NerdCursor
-  autocmd!
-  autocmd BufEnter NERD_tree_* setlocal cursorline
-  autocmd BufLeave NERD_tree_* setlocal nocursorline
-  autocmd BufEnter *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee,*.txt setlocal cursorline cursorcolumn
-  autocmd BufLeave *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee,*.txt setlocal nocursorline nocursorcolumn
-augroup END
 
 set tabstop=2
 set shiftwidth=2
@@ -93,16 +80,12 @@ vmap < <gv
 vmap > >gv
 
 set viminfo='250,h
-function! ResCur()
+function! RestoreCursorPos()
   if line("'\"") <= line("$")
     normal!  g'"
     return 1
   endif
 endfunction
-augroup ResCur
-  autocmd!
-  autocmd BufWinEnter * call ResCur()
-augroup END
 
 imap <F6> <Esc> :bp <CR>
 map <F6> :bp <CR>
@@ -110,11 +93,9 @@ imap <F7> <Esc> :bn <CR>
 map <F7> :bn <CR>
 nmap Q :b#<BAR>bd#<CR>
 
-autocmd VimEnter * NERDTree
 map <F10> :NERDTreeToggle<CR>
 let NERDTreeWinSize=20
 let NERDTreeShowHidden=0
-autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 function! s:CloseIfOnlyNerdTreeLeft()
   if exists("t:NERDTreeBufName")
     if bufwinnr(t:NERDTreeBufName) != -1
@@ -128,7 +109,6 @@ endfunction
 set keymap=russian-jcukenwin
 set iminsert=0
 set imsearch=0
-
 cmap <silent> <C-A> <C-^>
 imap <silent> <C-A> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
 nmap <silent> <C-A> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
@@ -158,9 +138,27 @@ function! Tab_Or_Complete()
   endif
 endfunction
 inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
-map <Esc>[Z <S-Tab>
-ounmap <Esc>[Z
-inoremap <S-Tab> <C-P>
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+
+augroup vimrc_autocmd 
+  autocmd!
+  "cursor
+  autocmd InsertEnter * highlight CursorLine   ctermbg=233
+  autocmd InsertLeave * highlight CursorLine   ctermbg=236
+  autocmd InsertEnter * highlight CursorColumn ctermbg=233
+  autocmd InsertLeave * highlight CursorColUmn ctermbg=236
+  autocmd FileType nerdtree setlocal nocursorcolumn
+  autocmd FileType conque_term setlocal nocursorcolumn nocursorline
+  autocmd BufEnter NERD_tree_* setlocal cursorline
+  autocmd BufLeave NERD_tree_* setlocal nocursorline
+  autocmd BufEnter *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee,*.txt setlocal cursorline cursorcolumn
+  autocmd BufLeave *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee,*.txt setlocal nocursorline nocursorcolumn
+  "NERDTree
+  autocmd VimEnter * NERDTree
+  autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+  "RestoreCursorPos
+  autocmd BufWinEnter * call RestoreCursorPos()
+  "RubyComplete
+  autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+  autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+augroup END
