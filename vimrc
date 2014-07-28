@@ -40,8 +40,11 @@ set noswapfile
 set showcmd
 set hidden
 set autoread
-syntax on
 set novisualbell
+
+syntax on
+set ttyfast
+set lazyredraw
 
 set wildmenu
 set wildmode=list:longest
