@@ -90,8 +90,8 @@ function! RestoreCursorPos()
   endif
 endfunction
 
-imap <F6> <Esc> :bp <CR>
-imap <F7> <Esc> :bn <CR>
+imap <F5> <Esc> :bp <CR>
+imap <F6> <Esc> :bn <CR>
 nmap Q :b#<BAR>bd#<CR>
 
 map <F10> :NERDTreeToggle<CR>
@@ -156,12 +156,12 @@ augroup vimrc_autocmd
   "NERDTree
   autocmd VimEnter * NERDTree
   autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+  autocmd BufEnter NERD_tree_* unmap <F5>
+  autocmd BufLeave NERD_tree_* map <F5> :bp <CR>
+  autocmd BufAdd * map <F5> :bp <CR>
   autocmd BufEnter NERD_tree_* unmap <F6>
-  autocmd BufLeave NERD_tree_* map <F6> :bp <CR>
-  autocmd BufAdd * map <F6> :bp <CR>
-  autocmd BufEnter NERD_tree_* unmap <F7>
-  autocmd BufLeave NERD_tree_* map <F7> :bn <CR>
-  autocmd BufAdd * map <F7> :bn <CR>
+  autocmd BufLeave NERD_tree_* map <F6> :bn <CR>
+  autocmd BufAdd * map <F6> :bn <CR>
   "RestoreCursorPos
   autocmd BufWinEnter * call RestoreCursorPos()
   "RubyComplete
