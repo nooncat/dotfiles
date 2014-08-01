@@ -60,11 +60,14 @@ set expandtab
 set smarttab
 set smartindent
 
+set textwidth=80
 set wrap
 set linebreak
 let &colorcolumn=join(range(81,999),",")
 "set breakindent
 set showbreak=\ \ " comment  so that the whitespace work >.>
+set backspace=indent,eol,start
+"set formatoptions+=t
 "set splitright
 
 set encoding=utf-8
