@@ -48,7 +48,7 @@ set lazyredraw
 "syntax sync minlines=256
 
 set wildmenu
-set wildmode=list:longest
+set wildmode=longest:full,full
 
 set cursorline
 set cursorcolumn
