@@ -43,8 +43,9 @@ set autoread
 set novisualbell
 
 syntax on
-set ttyfast
 set lazyredraw
+"set ttyfast
+"syntax sync minlines=256
 
 set wildmenu
 set wildmode=list:longest
