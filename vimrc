@@ -120,9 +120,9 @@ nmap <silent> <C-A> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
 vmap <silent> <C-A> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
 function MyKeyMapHighlight()
   if &iminsert == 0
-    hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
+    hi Vertsplit ctermbg=240 ctermfg=240
   else
-    hi StatusLine ctermfg=DarkRed guifg=DarkRed
+    hi Vertsplit ctermbg=160 ctermfg=160
   endif
 endfunction
 
@@ -130,7 +130,7 @@ imap <C-w><C-w> <esc><C-w><C-w>
 
 imap <C-c> <Esc>:ConqueTerm bash<CR>
 nmap <C-c> :ConqueTerm bash<CR>
-let g:ConqueTerm_InsertOnEnter = 1
+let g:ConqueTerm_InsertOnEnter = 0
 let g:ConqueTerm_ReadUnfocused = 1
 let g:ConqueTerm_CWInsert = 0
 "let g:ConqueTerm_Color = 1
@@ -155,8 +155,8 @@ augroup vimrc_autocmd
   autocmd FileType conque_term setlocal nocursorcolumn nocursorline
   autocmd BufEnter NERD_tree_* setlocal cursorline
   autocmd BufLeave NERD_tree_* setlocal nocursorline
-  autocmd BufEnter *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee,*.txt setlocal cursorline cursorcolumn
-  autocmd BufLeave *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee,*.txt setlocal nocursorline nocursorcolumn
+  autocmd BufEnter *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee,*.txt,*.yml setlocal cursorline cursorcolumn
+  autocmd BufLeave *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee,*.txt,*.yml setlocal nocursorline nocursorcolumn
   "NERDTree
   autocmd VimEnter * NERDTree
   autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
