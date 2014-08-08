@@ -24,7 +24,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 "let g:airline_theme = 'luna'
 set ttimeoutlen=10
-"set noshowmode
+set noshowmode
 
 let g:syntastic_enable_signs=1
 let g:syntastic_always_populate_lock_list=1
@@ -96,7 +96,7 @@ endfunction
 
 imap <F5> <Esc> :bp <CR>
 imap <F6> <Esc> :bn <CR>
-nmap Q :b#<BAR>bd#<CR>
+nmap Q :b#<BAR>bd#<BAR>b<CR>
 
 map <F10> :NERDTreeToggle<CR>
 let NERDTreeWinSize=20
@@ -122,7 +122,7 @@ function MyKeyMapHighlight()
   if &iminsert == 0
     hi Vertsplit ctermbg=240 ctermfg=240
   else
-    hi Vertsplit ctermbg=160 ctermfg=160
+    hi Vertsplit ctermbg=27 ctermfg=27
   endif
 endfunction
 
@@ -143,6 +143,12 @@ function! Tab_Or_Complete()
   endif
 endfunction
 inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+
+function! HighLightCommand()
+  hi Vertsplit ctermbg=160 ctermfg=160
+  nunmap :
+endfunction
+"nmap : :call HighLightCommand()<CR>
 
 augroup vimrc_autocmd
   autocmd!
