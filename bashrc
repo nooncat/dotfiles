@@ -9,7 +9,6 @@ if [[ -s /opt/bitnami/.bitnamirc ]]; then
 source /opt/bitnami/.bitnamirc
 fi
 
-#export TERM=xterm-256color
 
 PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[00m\]\$\[\e[m\] \[\e[1;32m\] '
 
@@ -17,3 +16,13 @@ PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[00m\]\$\[\e[m\] \[\e[1;3
 # /root/.bashrc if no exist copy from /etc/skel
 # uncomment force_color_prompt=yes
 # change to folowing code: PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$\[\e[1;32m\] '
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+export HISTSIZE=15000
+export HISTFILESIZE=2000000
+
+#export TERMINFO=/usr/share/terminfo
+export TERM=fbterm
