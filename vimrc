@@ -33,6 +33,10 @@ let g:syntastic_aggregate_errors=1
 set undofile
 set undodir=~/.vim/undo/
 
+xnoremap p pgvy
+nnoremap j gj
+nnoremap k gk
+
 set scrolloff=4
 set number
 set nobackup
@@ -44,8 +48,10 @@ set novisualbell
 
 syntax on
 set lazyredraw
+"set regexpengine=1    "for Vim version > 7.3.969
+"set synmaxcol=80
 "set ttyfast
-"syntax sync minlines=256
+"set ttyscroll=3
 
 set wildmenu
 set wildmode=longest:full,full
@@ -80,6 +86,8 @@ set incsearch
 "set nowrapscan
 set ignorecase
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
+nnoremap * *N
+vnoremap * y :execute ":let @/=@\""<CR> :execute "set hlsearch"<CR>
 
 imap >Ins> <Esc>i
 
@@ -143,12 +151,6 @@ function! Tab_Or_Complete()
   endif
 endfunction
 inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
-
-function! HighLightCommand()
-  hi Vertsplit ctermbg=160 ctermfg=160
-  nunmap :
-endfunction
-"nmap : :call HighLightCommand()<CR>
 
 augroup vimrc_autocmd
   autocmd!
