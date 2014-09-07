@@ -33,10 +33,6 @@ let g:syntastic_aggregate_errors=1
 set undofile
 set undodir=~/.vim/undo/
 
-xnoremap p pgvy
-nnoremap j gj
-nnoremap k gk
-
 set scrolloff=4
 set number
 set nobackup
@@ -68,6 +64,7 @@ set smarttab
 set smartindent
 
 set textwidth=80
+"set columns=80
 set wrap
 set linebreak
 let &colorcolumn=join(range(81,999),",")
@@ -75,7 +72,7 @@ let &colorcolumn=join(range(81,999),",")
 set showbreak=\ \ " comment  so that the whitespace work >.>
 set backspace=indent,eol,start
 "set formatoptions+=t
-"set splitright
+set splitright
 
 set encoding=utf-8
 set fileencodings=utf-8,windows-1251
@@ -89,10 +86,29 @@ nnoremap <silent> <CR> :nohlsearch<CR><CR>
 nnoremap * *N
 vnoremap * y :execute ":let @/=@\""<CR> :execute "set hlsearch"<CR>
 
+xnoremap p pgvy
+
+nnoremap j gj
+nnoremap k gk
+
 imap >Ins> <Esc>i
 
 vmap < <gv
 vmap > >gv
+
+nnoremap <space>o o<ESC>
+nnoremap <space>O O<ESC>
+
+imap <C-w><C-w> <esc><C-w><C-w>
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+imap <F5> <Esc> :bp <CR>
+imap <F6> <Esc> :bn <CR>
+nmap Q :b#<BAR>bd#<BAR>b<CR>
 
 set viminfo='250,h
 function! RestoreCursorPos()
@@ -101,10 +117,6 @@ function! RestoreCursorPos()
     return 1
   endif
 endfunction
-
-imap <F5> <Esc> :bp <CR>
-imap <F6> <Esc> :bn <CR>
-nmap Q :b#<BAR>bd#<BAR>b<CR>
 
 map <F10> :NERDTreeToggle<CR>
 let NERDTreeWinSize=20
@@ -133,8 +145,6 @@ function MyKeyMapHighlight()
     hi Vertsplit ctermbg=27 ctermfg=27
   endif
 endfunction
-
-imap <C-w><C-w> <esc><C-w><C-w>
 
 imap <C-c> <Esc>:ConqueTerm bash<CR>
 nmap <C-c> :ConqueTerm bash<CR>
