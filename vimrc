@@ -87,20 +87,15 @@ nnoremap * *N
 vnoremap * y :execute ":let @/=@\""<CR> :execute "set hlsearch"<CR>
 
 xnoremap p pgvy
-
 nnoremap j gj
 nnoremap k gk
-
 imap >Ins> <Esc>i
-
 vmap < <gv
 vmap > >gv
-
 nnoremap <space>o o<ESC>
 nnoremap <space>O O<ESC>
 
 imap <C-w><C-w> <esc><C-w><C-w>
-
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -175,6 +170,8 @@ augroup vimrc_autocmd
   autocmd BufLeave NERD_tree_* setlocal nocursorline
   autocmd BufEnter *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee,*.txt,*.yml setlocal cursorline cursorcolumn
   autocmd BufLeave *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee,*.txt,*.yml setlocal nocursorline nocursorcolumn
+  "conque_term scrolloff reseting fix
+  autocmd BufLeave bash* set scrolloff=4
   "NERDTree
   autocmd VimEnter * NERDTree
   autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
