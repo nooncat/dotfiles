@@ -4,14 +4,19 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
+Plugin 'tpope/vim-rails'
 Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
+Plugin 'scrooloose/syntastic'
 Plugin 'oplatek/Conque-Shell'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+Plugin 'kien/ctrlp.vim'
 
 call vundle#end()
 filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
 
 "СЪЕШЬ ЕЩЕ ЭТИХ МЯГКИХ ФРАНЦУЗКИХ БУЛОЧЕК И ВЫПЕЙ ЧАЮ съешь еще этих мягких французких булочек и выпей чаю
 
@@ -25,6 +30,8 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 "let g:airline_theme = 'luna'
 set ttimeoutlen=10
 set noshowmode
+set laststatus=2
+let g:airline_powerline_fonts = 1
 
 let g:syntastic_enable_signs=1
 let g:syntastic_always_populate_lock_list=1
@@ -34,6 +41,7 @@ set undofile
 set undodir=~/.vim/undo/
 
 set scrolloff=4
+"set scrolljump=3
 set number
 set nobackup
 set noswapfile
@@ -41,6 +49,7 @@ set showcmd
 set hidden
 set autoread
 set novisualbell
+set noerrorbells
 
 syntax on
 set lazyredraw
@@ -51,6 +60,8 @@ set lazyredraw
 
 set wildmenu
 set wildmode=longest:full,full
+
+"highlight SignColumn   ctermbg=234  //or fix Solarized.vim str.657 to: exe hi! SignColumn" .s:fmt_none .s:fg_blue .s:bg_none
 
 set cursorline
 set cursorcolumn
@@ -63,7 +74,7 @@ set expandtab
 set smarttab
 set smartindent
 
-set textwidth=80
+"set textwidth=0
 "set columns=80
 set wrap
 set linebreak
@@ -94,6 +105,7 @@ vmap < <gv
 vmap > >gv
 nnoremap <space>o o<ESC>
 nnoremap <space>O O<ESC>
+imap <C-D> <C-O>x
 
 imap <C-w><C-w> <esc><C-w><C-w>
 nnoremap <C-h> <C-w>h
@@ -101,9 +113,14 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-imap <F5> <Esc> :bp <CR>
-imap <F6> <Esc> :bn <CR>
-nmap Q :b#<BAR>bd#<BAR>b<CR>
+"imap <F4> <Esc> :bp <CR>
+"imap <F5> <Esc> :bn <CR>
+"nmap Q :b#<BAR>bd#<BAR>b<CR>
+map bh :bp <CR>
+map bl :bn <CR>
+map bn :new <CR>
+map bv :vnew <CR>
+map bd :b#<BAR>bd#<BAR>b<CR>
 
 set viminfo='250,h
 function! RestoreCursorPos()
@@ -113,9 +130,30 @@ function! RestoreCursorPos()
   endif
 endfunction
 
-map <F10> :NERDTreeToggle<CR>
+if !exists( "*RubyEndToken" )
+  function RubyEndToken()
+    let current_line = getline( '.' )
+    let braces_at_end = '{\s*\(|\(,\|\s\|\w\)*|\s*\)\?$'
+    let stuff_without_do = '^\s*\(class\|if\|unless\|begin\|case\|for\|module\|while\|until\|def\)'
+      let with_do = 'do\s*\(|\(,\|\s\|\w\)*|\s*\)\?$'
+
+      if match(current_line, braces_at_end) >= 0
+        return "\<CR>}\<C-O>O"
+      elseif match(current_line, stuff_without_do) >= 0
+        return "\<CR>end\<C-O>O"
+      elseif match(current_line, with_do) >= 0
+        return "\<CR>end\<C-O>O"
+      else
+        return "\<CR>"
+      endif
+    endfunction
+endif
+imap <CR> <C-R>=RubyEndToken()<CR>
+
+nmap nt :NERDTreeToggle<CR>
 let NERDTreeWinSize=20
 let NERDTreeShowHidden=0
+let NERDTreeQuitOnOpen = 1
 function! s:CloseIfOnlyNerdTreeLeft()
   if exists("t:NERDTreeBufName")
     if bufwinnr(t:NERDTreeBufName) != -1
@@ -159,6 +197,7 @@ inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 
 augroup vimrc_autocmd
   autocmd!
+
   "cursor
   autocmd InsertEnter * highlight CursorLine   ctermbg=233
   autocmd InsertLeave * highlight CursorLine   ctermbg=236
@@ -170,21 +209,30 @@ augroup vimrc_autocmd
   autocmd BufLeave NERD_tree_* setlocal nocursorline
   autocmd BufEnter *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee,*.txt,*.yml setlocal cursorline cursorcolumn
   autocmd BufLeave *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee,*.txt,*.yml setlocal nocursorline nocursorcolumn
+
   "conque_term scrolloff reseting fix
   autocmd BufLeave bash* set scrolloff=4
+
+  "coloscheme fix
+  autocmd VimEnter * colorscheme solarized
+  autocmd VimEnter * AirlineTheme dark
+
   "NERDTree
   autocmd VimEnter * NERDTree
   autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-  autocmd BufEnter NERD_tree_* unmap <F5>
-  autocmd BufLeave NERD_tree_* map <F5> :bp <CR>
-  autocmd BufAdd * map <F5> :bp <CR>
-  autocmd BufEnter NERD_tree_* unmap <F6>
-  autocmd BufLeave NERD_tree_* map <F6> :bn <CR>
-  autocmd BufAdd * map <F6> :bn <CR>
+  "autocmd BufEnter NERD_tree_* unmap <F4>
+  "autocmd BufLeave NERD_tree_* map <F4> :bp <CR>
+  "autocmd BufAdd * map <F4> :bp <CR>
+  "autocmd BufEnter NERD_tree_* unmap <F5>
+  "autocmd BufLeave NERD_tree_* map <F5> :bn <CR>
+  "autocmd BufAdd * map <F5> :bn <CR>
+  "
   "RestoreCursorPos
   autocmd BufWinEnter * call RestoreCursorPos()
+
   "RubyComplete
   autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
   autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+
 augroup END
