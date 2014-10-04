@@ -20,14 +20,20 @@ set omnifunc=syntaxcomplete#Complete
 
 "СЪЕШЬ ЕЩЕ ЭТИХ МЯГКИХ ФРАНЦУЗКИХ БУЛОЧЕК И ВЫПЕЙ ЧАЮ съешь еще этих мягких французких булочек и выпей чаю
 
-let g:solarized_termcolors=256
-set t_Co=256
-colorscheme solarized
+syntax on "must be above colorsetting block
+set lazyredraw
+"set regexpengine=1    "for Vim version > 7.3.969
+"set synmaxcol=80
+"set ttyfast
+"set ttyscroll=3
+
 set background=dark
+let g:solarized_termcolors=256
+colorscheme solarized
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-"let g:airline_theme = 'luna'
+let g:airline_theme = 'dark'
 set ttimeoutlen=10
 set noshowmode
 set laststatus=2
@@ -51,20 +57,11 @@ set autoread
 set novisualbell
 set noerrorbells
 
-syntax on
-set lazyredraw
-"set regexpengine=1    "for Vim version > 7.3.969
-"set synmaxcol=80
-"set ttyfast
-"set ttyscroll=3
-
 set wildmenu
 set wildmode=longest:full,full
 
 "highlight SignColumn   ctermbg=234  //or fix Solarized.vim str.657 to: exe hi! SignColumn" .s:fmt_none .s:fg_blue .s:bg_none
 
-set cursorline
-set cursorcolumn
 highlight CursorLine   ctermbg=236
 highlight CursorColumn ctermbg=236
 
@@ -212,10 +209,6 @@ augroup vimrc_autocmd
 
   "conque_term scrolloff reseting fix
   autocmd BufLeave bash* set scrolloff=4
-
-  "coloscheme fix
-  autocmd VimEnter * colorscheme solarized
-  autocmd VimEnter * AirlineTheme dark
 
   "NERDTree
   autocmd VimEnter * NERDTree
