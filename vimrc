@@ -202,10 +202,10 @@ augroup vimrc_autocmd
   autocmd InsertLeave * highlight CursorColUmn ctermbg=236
   autocmd FileType nerdtree setlocal nocursorcolumn
   autocmd FileType conque_term setlocal nocursorcolumn nocursorline
+  autocmd BufEnter *.*,*file setlocal cursorline cursorcolumn
+  autocmd BufLeave *.*,*file setlocal nocursorline nocursorcolumn
   autocmd BufEnter NERD_tree_* setlocal cursorline
   autocmd BufLeave NERD_tree_* setlocal nocursorline
-  autocmd BufEnter *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee,*.txt,*.yml setlocal cursorline cursorcolumn
-  autocmd BufLeave *.rb,*.erb,*.scss,*.css,*.js,*rc,*.coffee,*.txt,*.yml setlocal nocursorline nocursorcolumn
 
   "conque_term scrolloff reseting fix
   autocmd BufLeave bash* set scrolloff=4
