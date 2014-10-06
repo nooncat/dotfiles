@@ -18,26 +18,29 @@ call vundle#end()
 filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 
-"СЪЕШЬ ЕЩЕ ЭТИХ МЯГКИХ ФРАНЦУЗКИХ БУЛОЧЕК И ВЫПЕЙ ЧАЮ съешь еще этих мягких французких булочек и выпей чаю
-
-syntax on "must be above colorsetting block
+syntax enable "must be above colorsetting block
 set lazyredraw
 "set regexpengine=1    "for Vim version > 7.3.969
 "set synmaxcol=80
 "set ttyfast
 "set ttyscroll=3
 
+"if strftime("%H") >= 1 && strftime("%H") <= 24
+"  set background=light
+"else
+"  set background=dark
+"endif
 set background=dark
 let g:solarized_termcolors=256
-colorscheme solarized
+colorscheme solarized   "bug sets background to light
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_theme = 'dark'
+let g:airline_powerline_fonts = 1
 set ttimeoutlen=10
 set noshowmode
 set laststatus=2
-let g:airline_powerline_fonts = 1
 
 let g:syntastic_enable_signs=1
 let g:syntastic_always_populate_lock_list=1
@@ -62,8 +65,15 @@ set wildmode=longest:full,full
 
 "highlight SignColumn   ctermbg=234  //or fix Solarized.vim str.657 to: exe hi! SignColumn" .s:fmt_none .s:fg_blue .s:bg_none
 
-highlight CursorLine   ctermbg=236
-highlight CursorColumn ctermbg=236
+"set cursorline
+"set cursorcolumn
+if &background=="dark"
+  highlight CursorLine   ctermbg=236
+  highlight CursorColumn ctermbg=236
+else
+  highlight CursorLine   ctermbg=186
+  highlight CursorColumn ctermbg=186
+endif
 
 set tabstop=2
 set shiftwidth=2
@@ -194,12 +204,21 @@ inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 
 augroup vimrc_autocmd
   autocmd!
+  "day/nigth colortheme switch
+  "autocmd bufwritepost * source ~/.vimrc
 
   "cursor
-  autocmd InsertEnter * highlight CursorLine   ctermbg=233
-  autocmd InsertLeave * highlight CursorLine   ctermbg=236
-  autocmd InsertEnter * highlight CursorColumn ctermbg=233
-  autocmd InsertLeave * highlight CursorColUmn ctermbg=236
+  if &background=="dark"
+    autocmd InsertEnter * highlight CursorLine   ctermbg=233
+    autocmd InsertLeave * highlight CursorLine   ctermbg=236
+    autocmd InsertEnter * highlight CursorColumn ctermbg=233
+    autocmd InsertLeave * highlight CursorColUmn ctermbg=236
+  else
+    autocmd InsertEnter * highlight CursorLine   ctermbg=253
+    autocmd InsertLeave * highlight CursorLine   ctermbg=186
+    autocmd InsertEnter * highlight CursorColumn ctermbg=253
+    autocmd InsertLeave * highlight CursorColUmn ctermbg=186
+  endif
   autocmd FileType nerdtree setlocal nocursorcolumn
   autocmd FileType conque_term setlocal nocursorcolumn nocursorline
   autocmd BufEnter *.*,*file setlocal cursorline cursorcolumn
@@ -229,3 +248,6 @@ augroup vimrc_autocmd
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 augroup END
+
+"СЪЕШЬ ЕЩЕ ЭТИХ МЯГКИХ ФРАНЦУЗКИХ БУЛОЧЕК И ВЫПЕЙ ЧАЮ съешь еще этих мягких французких булочек и выпей чаю
+
