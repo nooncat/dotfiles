@@ -59,21 +59,25 @@ set hidden
 set autoread
 set novisualbell
 set noerrorbells
+set list
+set listchars=trail:·   ",eol:¬, trail:∙
 
 set wildmenu
 set wildmode=longest:full,full
 
 "highlight SignColumn   ctermbg=234  //or fix Solarized.vim str.657 to: exe hi! SignColumn" .s:fmt_none .s:fg_blue .s:bg_none
 
+highlight CursorLine   ctermbg=236
+highlight CursorColumn ctermbg=236
 "set cursorline
 "set cursorcolumn
-if &background=="dark"
-  highlight CursorLine   ctermbg=236
-  highlight CursorColumn ctermbg=236
-else
-  highlight CursorLine   ctermbg=186
-  highlight CursorColumn ctermbg=186
-endif
+"if &background=="dark"
+"  highlight CursorLine   ctermbg=236
+"  highlight CursorColumn ctermbg=236
+"else
+"  highlight CursorLine   ctermbg=186
+"  highlight CursorColumn ctermbg=186
+"endif
 
 set tabstop=2
 set shiftwidth=2
@@ -204,21 +208,23 @@ inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 
 augroup vimrc_autocmd
   autocmd!
-  "day/nigth colortheme switch
-  "autocmd bufwritepost * source ~/.vimrc
 
   "cursor
-  if &background=="dark"
     autocmd InsertEnter * highlight CursorLine   ctermbg=233
     autocmd InsertLeave * highlight CursorLine   ctermbg=236
     autocmd InsertEnter * highlight CursorColumn ctermbg=233
     autocmd InsertLeave * highlight CursorColUmn ctermbg=236
-  else
-    autocmd InsertEnter * highlight CursorLine   ctermbg=253
-    autocmd InsertLeave * highlight CursorLine   ctermbg=186
-    autocmd InsertEnter * highlight CursorColumn ctermbg=253
-    autocmd InsertLeave * highlight CursorColUmn ctermbg=186
-  endif
+  "if &background=="dark"
+  "  autocmd InsertEnter * highlight CursorLine   ctermbg=233
+  "  autocmd InsertLeave * highlight CursorLine   ctermbg=236
+  "  autocmd InsertEnter * highlight CursorColumn ctermbg=233
+  "  autocmd InsertLeave * highlight CursorColUmn ctermbg=236
+  "else
+  "  autocmd InsertEnter * highlight CursorLine   ctermbg=253
+  "  autocmd InsertLeave * highlight CursorLine   ctermbg=186
+  "  autocmd InsertEnter * highlight CursorColumn ctermbg=253
+  "  autocmd InsertLeave * highlight CursorColUmn ctermbg=186
+  "endif
   autocmd FileType nerdtree setlocal nocursorcolumn
   autocmd FileType conque_term setlocal nocursorcolumn nocursorline
   autocmd BufEnter *.*,*file setlocal cursorline cursorcolumn
