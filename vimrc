@@ -20,19 +20,16 @@ set omnifunc=syntaxcomplete#Complete
 
 syntax enable "must be above colorsetting block
 set lazyredraw
-"set regexpengine=1    "for Vim version > 7.3.969
+set regexpengine=1    "for Vim version > 7.3.969
 "set synmaxcol=80
-"set ttyfast
+set ttyfast
 "set ttyscroll=3
 
-"if strftime("%H") >= 1 && strftime("%H") <= 24
-"  set background=light
-"else
-"  set background=dark
-"endif
 set background=dark
-let g:solarized_termcolors=256
-colorscheme solarized   "bug sets background to light
+set t_Co=256
+"let g:solarized_termcolors=256
+colorscheme solarized   "bug sets background to light in fbterm
+call togglebg#map("<F5>")
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -67,9 +64,9 @@ set wildmode=longest:full,full
 
 "highlight SignColumn   ctermbg=234  //or fix Solarized.vim str.657 to: exe hi! SignColumn" .s:fmt_none .s:fg_blue .s:bg_none
 
-highlight CursorLine   ctermbg=236
-highlight CursorColumn ctermbg=236
-"set cursorline
+"highlight CursorLine   ctermbg=236
+"highlight CursorColumn ctermbg=236
+set cursorline
 "set cursorcolumn
 "if &background=="dark"
 "  highlight CursorLine   ctermbg=236
@@ -208,12 +205,16 @@ inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 
 augroup vimrc_autocmd
   autocmd!
+  "cursor shape in insert mode Gnome-terminal
+  au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+  au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+  au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
 
   "cursor
-    autocmd InsertEnter * highlight CursorLine   ctermbg=233
-    autocmd InsertLeave * highlight CursorLine   ctermbg=236
-    autocmd InsertEnter * highlight CursorColumn ctermbg=233
-    autocmd InsertLeave * highlight CursorColUmn ctermbg=236
+  "  autocmd InsertEnter * highlight CursorLine   ctermbg=233
+  "  autocmd InsertLeave * highlight CursorLine   ctermbg=236
+  "  autocmd InsertEnter * highlight CursorColumn ctermbg=233
+  "  autocmd InsertLeave * highlight CursorColUmn ctermbg=236
   "if &background=="dark"
   "  autocmd InsertEnter * highlight CursorLine   ctermbg=233
   "  autocmd InsertLeave * highlight CursorLine   ctermbg=236
@@ -225,12 +226,12 @@ augroup vimrc_autocmd
   "  autocmd InsertEnter * highlight CursorColumn ctermbg=253
   "  autocmd InsertLeave * highlight CursorColUmn ctermbg=186
   "endif
-  autocmd FileType nerdtree setlocal nocursorcolumn
-  autocmd FileType conque_term setlocal nocursorcolumn nocursorline
-  autocmd BufEnter *.*,*file setlocal cursorline cursorcolumn
-  autocmd BufLeave *.*,*file setlocal nocursorline nocursorcolumn
-  autocmd BufEnter NERD_tree_* setlocal cursorline
-  autocmd BufLeave NERD_tree_* setlocal nocursorline
+  "autocmd FileType nerdtree setlocal nocursorcolumn
+  "autocmd FileType conque_term setlocal nocursorcolumn nocursorline
+  "autocmd BufEnter *.*,*file setlocal cursorline cursorcolumn
+  "autocmd BufLeave *.*,*file setlocal nocursorline nocursorcolumn
+  "autocmd BufEnter NERD_tree_* setlocal cursorline
+  "autocmd BufLeave NERD_tree_* setlocal nocursorline
 
   "conque_term scrolloff reseting fix
   autocmd BufLeave bash* set scrolloff=4
