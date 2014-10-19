@@ -26,7 +26,7 @@ set ttyfast
 "set ttyscroll=3
 
 set background=dark
-set t_Co=256
+set t_Co=16
 "let g:solarized_termcolors=256
 colorscheme solarized   "bug sets background to light in fbterm
 call togglebg#map("<F5>")
@@ -86,8 +86,8 @@ set smartindent
 "set columns=80
 set wrap
 set linebreak
-let &colorcolumn=join(range(81,999),",")
-"set breakindent
+"let &colorcolumn=join(range(81,999),",")
+set breakindent
 set showbreak=\ \ " comment  so that the whitespace work >.>
 set backspace=indent,eol,start
 "set formatoptions+=t
@@ -121,13 +121,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-"imap <F4> <Esc> :bp <CR>
-"imap <F5> <Esc> :bn <CR>
-"nmap Q :b#<BAR>bd#<BAR>b<CR>
 map bh :bp <CR>
 map bl :bn <CR>
-map bn :new <CR>
-map bv :vnew <CR>
 map bd :b#<BAR>bd#<BAR>b<CR>
 
 set viminfo='250,h
@@ -210,7 +205,7 @@ augroup vimrc_autocmd
   au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
   au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
 
-  "cursor
+  "cursor for server linux
   "  autocmd InsertEnter * highlight CursorLine   ctermbg=233
   "  autocmd InsertLeave * highlight CursorLine   ctermbg=236
   "  autocmd InsertEnter * highlight CursorColumn ctermbg=233
@@ -239,12 +234,12 @@ augroup vimrc_autocmd
   "NERDTree
   autocmd VimEnter * NERDTree
   autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-  "autocmd BufEnter NERD_tree_* unmap <F4>
-  "autocmd BufLeave NERD_tree_* map <F4> :bp <CR>
-  "autocmd BufAdd * map <F4> :bp <CR>
-  "autocmd BufEnter NERD_tree_* unmap <F5>
-  "autocmd BufLeave NERD_tree_* map <F5> :bn <CR>
-  "autocmd BufAdd * map <F5> :bn <CR>
+  autocmd BufEnter NERD_tree_* unmap bh
+  autocmd BufLeave NERD_tree_* map bh :bp <CR>
+  autocmd BufAdd * map bh :bp <CR>
+  autocmd BufEnter NERD_tree_* unmap bl
+  autocmd BufLeave NERD_tree_* map bl :bn <CR>
+  autocmd BufAdd * map bl :bn <CR>
   "
   "RestoreCursorPos
   autocmd BufWinEnter * call RestoreCursorPos()
