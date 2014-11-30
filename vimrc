@@ -7,20 +7,24 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-rails'
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
-Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'   " sudo npm install -g jsint/jshint
 Plugin 'oplatek/Conque-Shell'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
-Plugin 'kien/ctrlp.vim'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'Valloric/YouCompleteMe'
+"Plugin 'kien/ctrlp.vim'
+"Plugin 'burnettk/vim-angular'
 
 call vundle#end()
 filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 
-syntax enable "must be above colorsetting block
-set lazyredraw
 set regexpengine=1    "for Vim version > 7.3.969
+syntax enable         "must be above colorsetting block
+set lazyredraw
 "set synmaxcol=80
 set ttyfast
 "set ttyscroll=3
@@ -57,7 +61,7 @@ set autoread
 set novisualbell
 set noerrorbells
 set list
-set listchars=trail:·   ",eol:¬, trail:∙
+set listchars=trail:·,tab:>-   ",eol:¬, trail:∙
 
 set wildmenu
 set wildmode=longest:full,full
@@ -76,8 +80,8 @@ set cursorline
 "  highlight CursorColumn ctermbg=186
 "endif
 
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set expandtab
 set smarttab
 set smartindent
@@ -151,9 +155,8 @@ if !exists( "*RubyEndToken" )
       endif
     endfunction
 endif
-imap <CR> <C-R>=RubyEndToken()<CR>
 
-nmap nt :NERDTreeToggle<CR>
+nmap tt :NERDTreeToggle<CR>
 let NERDTreeWinSize=20
 let NERDTreeShowHidden=0
 let NERDTreeQuitOnOpen = 1
@@ -184,7 +187,7 @@ endfunction
 
 imap <C-c> <Esc>:ConqueTerm bash<CR>
 nmap <C-c> :ConqueTerm bash<CR>
-let g:ConqueTerm_InsertOnEnter = 0
+let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_ReadUnfocused = 1
 let g:ConqueTerm_CWInsert = 0
 "let g:ConqueTerm_Color = 1
@@ -196,7 +199,7 @@ function! Tab_Or_Complete()
     return "\<Tab>"
   endif
 endfunction
-inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+"inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 
 augroup vimrc_autocmd
   autocmd!
@@ -228,6 +231,12 @@ augroup vimrc_autocmd
   "autocmd BufEnter NERD_tree_* setlocal cursorline
   "autocmd BufLeave NERD_tree_* setlocal nocursorline
 
+  "javascript brackets autoclose
+  "autocmd FileType javascript inoremap {<CR> {<CR>}<Esc><S-o> //not working in vim 7.4
+
+  "ruby brackets autoclose
+  "autocmd FileType ruby  inoremap <CR> <C-R>=RubyEndToken()<CR>
+
   "conque_term scrolloff reseting fix
   autocmd BufLeave bash* set scrolloff=4
 
@@ -245,9 +254,16 @@ augroup vimrc_autocmd
   autocmd BufWinEnter * call RestoreCursorPos()
 
   "RubyComplete
-  autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-  autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+  "autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+  "autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+  "autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+
+  "javascriptlibraries enabling
+  autocmd BufReadPre *.js let b:javascript_lib_use_jquery = 1
+  autocmd BufReadPre *.js let b:javascript_lib_use_underscore = 1
+  autocmd BufReadPre *.js let b:javascript_lib_use_backbone = 1
+  autocmd BufReadPre *.js let b:javascript_lib_use_jasmine = 1
+  autocmd BufReadPre *.js let b:javascript_lib_use_angularjs = 1
 
 augroup END
 
