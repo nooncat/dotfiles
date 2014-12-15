@@ -14,20 +14,24 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-endwise'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'tpope/vim-repeat'
+Plugin 'Lokaltog/vim-easymotion'
+"Plugin 'tpope/vim-surround'
 "Plugin 'kien/ctrlp.vim'
 "Plugin 'burnettk/vim-angular'
 
 call vundle#end()
 filetype plugin indent on
-set omnifunc=syntaxcomplete#Complete
+"set omnifunc=syntaxcomplete#Complete
 
 set regexpengine=1    "for Vim version > 7.3.969
 syntax enable         "must be above colorsetting block
 set lazyredraw
-"set synmaxcol=80
+set synmaxcol=80
 set ttyfast
-"set ttyscroll=3
+set ttyscroll=3
 
 set background=dark
 set t_Co=16
@@ -47,6 +51,8 @@ let g:syntastic_enable_signs=1
 let g:syntastic_always_populate_lock_list=1
 let g:syntastic_aggregate_errors=1
 
+let g:gitgutter_map_keys = 0
+
 set undofile
 set undodir=~/.vim/undo/
 
@@ -62,6 +68,7 @@ set novisualbell
 set noerrorbells
 set list
 set listchars=trail:·,tab:>-   ",eol:¬, trail:∙
+set pastetoggle=<F2>
 
 set wildmenu
 set wildmode=longest:full,full
@@ -80,8 +87,8 @@ set cursorline
 "  highlight CursorColumn ctermbg=186
 "endif
 
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 set smarttab
 set smartindent
@@ -90,7 +97,7 @@ set smartindent
 "set columns=80
 set wrap
 set linebreak
-"let &colorcolumn=join(range(81,999),",")
+let &colorcolumn=join(range(81,999),",")
 set breakindent
 set showbreak=\ \ " comment  so that the whitespace work >.>
 set backspace=indent,eol,start
@@ -108,6 +115,23 @@ set ignorecase
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
 nnoremap * *N
 vnoremap * y :execute ":let @/=@\""<CR> :execute "set hlsearch"<CR>
+
+let mapleader = ","
+
+let g:EasyMotion_do_mapping = 0
+nmap s <Plug>(easymotion-s2)
+let g:EasyMotion_use_upper = 1
+let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
+let g:EasyMotion_smartcase=1
+let g:EasyMotion_use_smartsign_us = 1
+map  / <Plug>(easymotion-sn)
+"map  n <Plug>(easymotion-next)
+"map  N <Plug>(easymotion-prev)
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+let g:EasyMotion_startofline = 0
 
 xnoremap p pgvy
 nnoremap j gj
@@ -137,26 +161,7 @@ function! RestoreCursorPos()
   endif
 endfunction
 
-if !exists( "*RubyEndToken" )
-  function RubyEndToken()
-    let current_line = getline( '.' )
-    let braces_at_end = '{\s*\(|\(,\|\s\|\w\)*|\s*\)\?$'
-    let stuff_without_do = '^\s*\(class\|if\|unless\|begin\|case\|for\|module\|while\|until\|def\)'
-      let with_do = 'do\s*\(|\(,\|\s\|\w\)*|\s*\)\?$'
-
-      if match(current_line, braces_at_end) >= 0
-        return "\<CR>}\<C-O>O"
-      elseif match(current_line, stuff_without_do) >= 0
-        return "\<CR>end\<C-O>O"
-      elseif match(current_line, with_do) >= 0
-        return "\<CR>end\<C-O>O"
-      else
-        return "\<CR>"
-      endif
-    endfunction
-endif
-
-nmap tt :NERDTreeToggle<CR>
+nmap <leader>t :NERDTreeToggle<CR>
 let NERDTreeWinSize=20
 let NERDTreeShowHidden=0
 let NERDTreeQuitOnOpen = 1
@@ -187,19 +192,10 @@ endfunction
 
 imap <C-c> <Esc>:ConqueTerm bash<CR>
 nmap <C-c> :ConqueTerm bash<CR>
-let g:ConqueTerm_InsertOnEnter = 1
+let g:ConqueTerm_InsertOnEnter = 0
 let g:ConqueTerm_ReadUnfocused = 1
 let g:ConqueTerm_CWInsert = 0
 "let g:ConqueTerm_Color = 1
-
-function! Tab_Or_Complete()
-  if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
-    return "\<C-N>"
-  else
-    return "\<Tab>"
-  endif
-endfunction
-"inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 
 augroup vimrc_autocmd
   autocmd!
@@ -231,14 +227,9 @@ augroup vimrc_autocmd
   "autocmd BufEnter NERD_tree_* setlocal cursorline
   "autocmd BufLeave NERD_tree_* setlocal nocursorline
 
-  "javascript brackets autoclose
-  "autocmd FileType javascript inoremap {<CR> {<CR>}<Esc><S-o> //not working in vim 7.4
-
-  "ruby brackets autoclose
-  "autocmd FileType ruby  inoremap <CR> <C-R>=RubyEndToken()<CR>
-
-  "conque_term scrolloff reseting fix
+  "conque_term scrolloff reseting fix & trailing chars
   autocmd BufLeave bash* set scrolloff=4
+  autocmd BufEnter bash* setlocal nolist
 
   "NERDTree
   autocmd VimEnter * NERDTree
@@ -252,11 +243,6 @@ augroup vimrc_autocmd
   "
   "RestoreCursorPos
   autocmd BufWinEnter * call RestoreCursorPos()
-
-  "RubyComplete
-  "autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-  "autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-  "autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
   "javascriptlibraries enabling
   autocmd BufReadPre *.js let b:javascript_lib_use_jquery = 1
