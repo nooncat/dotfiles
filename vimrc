@@ -14,7 +14,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-endwise'
+"Plugin 'tpope/vim-endwise'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
@@ -72,9 +72,13 @@ set noerrorbells
 set list
 set listchars=trail:·,tab:>-   ",eol:¬, trail:∙
 set pastetoggle=<F4>
+"map q <Nop>  // turn off record mode
 
 set wildmenu
 set wildmode=longest:full,full
+
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
 
 "highlight SignColumn   ctermbg=234  //or fix Solarized.vim str.657 to: exe hi! SignColumn" .s:fmt_none .s:fg_blue .s:bg_none
 
@@ -155,7 +159,7 @@ nnoremap <C-l> <C-w>l
 
 map bh :bp <CR>
 map bl :bn <CR>
-map bd :b#<BAR>bd#<BAR>b<CR>
+map bu :b#<BAR>bd#<BAR>b<CR>
 
 set viminfo='250,h
 function! RestoreCursorPos()
