@@ -105,6 +105,10 @@ set smartindent
 set wrap
 set linebreak
 let &colorcolumn=join(range(81,999),",")
+
+"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"match OverLength /\%81v.\+/
+
 set breakindent
 set showbreak=\ \ " comment  so that the whitespace work >.>
 set backspace=indent,eol,start
@@ -157,9 +161,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-map bh :bp <CR>
-map bl :bn <CR>
-map bu :b#<BAR>bd#<BAR>b<CR>
+"section need to change in autocomand nerdtree too
+nmap H :bp <CR>
+nmap L :bn <CR>
+nmap U :b#<BAR>bd#<BAR>b<CR>
 
 set viminfo='250,h
 function! RestoreCursorPos()
@@ -242,12 +247,12 @@ augroup vimrc_autocmd
   "NERDTree
   autocmd VimEnter * NERDTree
   autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-  autocmd BufEnter NERD_tree_* unmap bh
-  autocmd BufLeave NERD_tree_* map bh :bp <CR>
-  autocmd BufAdd * map bh :bp <CR>
-  autocmd BufEnter NERD_tree_* unmap bl
-  autocmd BufLeave NERD_tree_* map bl :bn <CR>
-  autocmd BufAdd * map bl :bn <CR>
+  autocmd BufEnter NERD_tree_* nunmap H
+  autocmd BufLeave NERD_tree_* nmap H :bp <CR>
+  autocmd BufAdd * nmap H :bp <CR>
+  autocmd BufEnter NERD_tree_* nunmap L
+  autocmd BufLeave NERD_tree_* nmap L :bn <CR>
+  autocmd BufAdd * nmap L :bn <CR>
   "
   "RestoreCursorPos
   autocmd BufWinEnter * call RestoreCursorPos()
