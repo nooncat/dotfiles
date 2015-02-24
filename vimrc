@@ -15,7 +15,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'tpope/vim-endwise'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'  "cd ~/.vim/bundle/YouCompleteMe  ./install.sh
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
 Plugin 'tpope/vim-repeat'
@@ -50,9 +50,16 @@ set ttimeoutlen=10
 set noshowmode
 set laststatus=2
 
-let g:syntastic_enable_signs=1
-let g:syntastic_always_populate_lock_list=1
-let g:syntastic_aggregate_errors=1
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_lock_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_loc_list_height = 8
+let g:syntastic_check_on_open = 1
+let g:syntastic_enable_signs = 1
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_javascript_checkers = ['jslint']
 
 let g:gitgutter_map_keys = 0
 
@@ -106,9 +113,6 @@ set wrap
 set linebreak
 let &colorcolumn=join(range(81,999),",")
 
-"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-"match OverLength /\%81v.\+/
-
 set breakindent
 set showbreak=\ \ " comment  so that the whitespace work >.>
 set backspace=indent,eol,start
@@ -136,7 +140,7 @@ let g:EasyMotion_use_upper = 1
 let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
 let g:EasyMotion_smartcase=1
 let g:EasyMotion_use_smartsign_us = 1
-map  / <Plug>(easymotion-sn)
+"map  / <Plug>(easymotion-sn)
 "map  n <Plug>(easymotion-next)
 "map  N <Plug>(easymotion-prev)
 "map <Leader>l <Plug>(easymotion-lineforward)
