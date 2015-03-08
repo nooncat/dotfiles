@@ -32,7 +32,7 @@ filetype plugin indent on
 set regexpengine=1    "for Vim version > 7.3.969
 syntax enable         "must be above colorsetting block
 set lazyredraw
-set synmaxcol=80
+"set synmaxcol=80
 set ttyfast
 set ttyscroll=3
 
@@ -50,12 +50,12 @@ set ttimeoutlen=10
 set noshowmode
 set laststatus=2
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_lock_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_loc_list_height = 8
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_lock_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_loc_list_height = 8
 let g:syntastic_check_on_open = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_aggregate_errors = 1
