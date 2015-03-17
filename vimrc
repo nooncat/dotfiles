@@ -15,9 +15,11 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'tpope/vim-endwise'
+
 Plugin 'Valloric/YouCompleteMe'  "cd ~/.vim/bundle/YouCompleteMe  ./install.sh
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
+
 Plugin 'tpope/vim-repeat'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'gregsexton/MatchTag'
@@ -62,6 +64,26 @@ let g:syntastic_aggregate_errors = 1
 let g:syntastic_javascript_checkers = ['jslint']
 
 let g:gitgutter_map_keys = 0
+
+let g:EasyMotion_do_mapping = 0
+nmap s <Plug>(easymotion-s2)
+let g:EasyMotion_use_upper = 1
+let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
+let g:EasyMotion_smartcase=1
+let g:EasyMotion_use_smartsign_us = 1
+"map  / <Plug>(easymotion-sn)
+"map  n <Plug>(easymotion-next)
+"map  N <Plug>(easymotion-prev)
+"map <Leader>l <Plug>(easymotion-lineforward)
+"map <Leader>j <Plug>(easymotion-j)
+"map <Leader>k <Plug>(easymotion-k)
+"map <Leader>h <Plug>(easymotion-linebackward)
+"let g:EasyMotion_startofline = 0
+
+"let g:ycm_key_list_previous_completion=['<Up>']
+
+let g:UltiSnipsExpandTrigger="<c-j>"
+"let g:UltiSnipsListSnippets="<c-s-tab>"
 
 set undofile
 set undodir=~/.vim/undo/
@@ -133,21 +155,7 @@ vnoremap * y :execute ":let @/=@\""<CR> :execute"set hlsearch"<CR>
 
 let mapleader = ","
 nnoremap <leader>s :shell<CR>
-
-let g:EasyMotion_do_mapping = 0
-nmap s <Plug>(easymotion-s2)
-let g:EasyMotion_use_upper = 1
-let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
-let g:EasyMotion_smartcase=1
-let g:EasyMotion_use_smartsign_us = 1
-"map  / <Plug>(easymotion-sn)
-"map  n <Plug>(easymotion-next)
-"map  N <Plug>(easymotion-prev)
-"map <Leader>l <Plug>(easymotion-lineforward)
-"map <Leader>j <Plug>(easymotion-j)
-"map <Leader>k <Plug>(easymotion-k)
-"map <Leader>h <Plug>(easymotion-linebackward)
-"let g:EasyMotion_startofline = 0
+nnoremap <leader>w :w<CR>
 
 xnoremap p pgvy
 nnoremap j gj
@@ -178,7 +186,7 @@ function! RestoreCursorPos()
   endif
 endfunction
 
-nmap <leader>t :NERDTreeToggle<CR>
+nmap <leader>f :NERDTreeToggle<CR>
 let NERDTreeWinSize=20
 let NERDTreeShowHidden=0
 let NERDTreeQuitOnOpen = 1
