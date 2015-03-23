@@ -80,10 +80,9 @@ let g:EasyMotion_use_smartsign_us = 1
 "map <Leader>h <Plug>(easymotion-linebackward)
 "let g:EasyMotion_startofline = 0
 
-"let g:ycm_key_list_previous_completion=['<Up>']
+let ycm_min_num_of_chars_for_completion = 1
 
 let g:UltiSnipsExpandTrigger="<c-j>"
-"let g:UltiSnipsListSnippets="<c-s-tab>"
 
 set undofile
 set undodir=~/.vim/undo/
@@ -156,6 +155,7 @@ vnoremap * y :execute ":let @/=@\""<CR> :execute"set hlsearch"<CR>
 let mapleader = ","
 nnoremap <leader>s :shell<CR>
 nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
 
 xnoremap p pgvy
 nnoremap j gj
