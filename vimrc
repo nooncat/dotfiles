@@ -6,6 +6,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-rails'
 Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic'   " sudo npm install -g jsint/jshint
 Plugin 'oplatek/Conque-Shell'
@@ -24,7 +25,6 @@ Plugin 'tpope/vim-repeat'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'gregsexton/MatchTag'
 "Plugin 'tpope/vim-surround'
-"Plugin 'kien/ctrlp.vim'
 "Plugin 'burnettk/vim-angular'
 
 call vundle#end()
@@ -46,7 +46,7 @@ call togglebg#map("<F5>")
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_theme = 'dark'
+"let g:airline_theme = 'dark'
 let g:airline_powerline_fonts = 1
 set ttimeoutlen=10
 set noshowmode
@@ -224,7 +224,7 @@ let g:ConqueTerm_CWInsert = 0
 
 augroup vimrc_autocmd
   autocmd!
-  "cursor shape in insert mode Gnome-terminal
+  "Cursor shape in insert mode Gnome-terminal. Is need to compare profile names.
   au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
   au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
   au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
