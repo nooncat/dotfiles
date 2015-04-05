@@ -80,9 +80,15 @@ let g:EasyMotion_use_smartsign_us = 1
 "map <Leader>h <Plug>(easymotion-linebackward)
 "let g:EasyMotion_startofline = 0
 
-let ycm_min_num_of_chars_for_completion = 1
+"let ycm_min_num_of_chars_for_completion = 1
 
 let g:UltiSnipsExpandTrigger="<c-j>"
+
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_map = '<leader>f'
+
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
 
 set undofile
 set undodir=~/.vim/undo/
@@ -104,9 +110,6 @@ set pastetoggle=<F4>
 
 set wildmenu
 set wildmode=longest:full,full
-
-let g:html_indent_script1 = "inc"
-let g:html_indent_style1 = "inc"
 
 "highlight SignColumn   ctermbg=234  //or fix Solarized.vim str.657 to: exe hi! SignColumn" .s:fmt_none .s:fg_blue .s:bg_none
 
@@ -186,7 +189,7 @@ function! RestoreCursorPos()
   endif
 endfunction
 
-nmap <leader>f :NERDTreeToggle<CR>
+nmap <leader>t :NERDTreeToggle<CR>
 let NERDTreeWinSize=20
 let NERDTreeShowHidden=0
 let NERDTreeQuitOnOpen = 1
@@ -257,7 +260,9 @@ augroup vimrc_autocmd
   autocmd BufEnter bash* setlocal nolist
 
   "NERDTree
-  autocmd VimEnter * NERDTree
+  autocmd STdinReadPre * let s:std_in=1
+  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
   autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
   autocmd BufEnter NERD_tree_* nunmap H
   autocmd BufLeave NERD_tree_* nmap H :bp <CR>
