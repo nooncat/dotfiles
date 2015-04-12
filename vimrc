@@ -40,13 +40,13 @@ set ttyscroll=3
 
 set background=dark
 set t_Co=16
-"let g:solarized_termcolors=256
+"let g:solarized_termcolors=256 "comment for Cygwin & gnome-terminal
 colorscheme solarized   "bug sets background to light in fbterm
 call togglebg#map("<F5>")
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-"let g:airline_theme = 'dark'
+let g:airline_theme = 'luna'
 let g:airline_powerline_fonts = 1
 set ttimeoutlen=10
 set noshowmode
@@ -83,6 +83,7 @@ let g:EasyMotion_use_smartsign_us = 1
 "let ycm_min_num_of_chars_for_completion = 1
 
 let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsUsePythonVersion = 2  "cygwin ycm+ultisnips fixing
 
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_map = '<leader>f'
@@ -124,6 +125,12 @@ set cursorline
 "  highlight CursorLine   ctermbg=186
 "  highlight CursorColumn ctermbg=186
 "endif
+
+"Cursor shape in insert mode in cygwin mintty
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
 
 set tabstop=2
 set shiftwidth=2
@@ -227,7 +234,7 @@ let g:ConqueTerm_CWInsert = 0
 
 augroup vimrc_autocmd
   autocmd!
-  "Cursor shape in insert mode Gnome-terminal. Is need to compare profile names.
+  "Cursor shape in insert mode Gnome-terminal. Is need to compare profile names. Comment these lines in Cygwin.
   au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
   au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
   au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
