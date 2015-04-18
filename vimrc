@@ -1,3 +1,7 @@
+set encoding=utf-8
+set fileencodings=utf-8,windows-1251
+set termencoding=utf-8
+
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -8,8 +12,8 @@ Plugin 'tpope/vim-rails'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
+"Plugin 'edkolev/tmuxline.vim'
 Plugin 'scrooloose/syntastic'   " sudo npm install -g jsint/jshint
-Plugin 'oplatek/Conque-Shell'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
@@ -51,6 +55,24 @@ let g:airline_powerline_fonts = 1
 set ttimeoutlen=10
 set noshowmode
 set laststatus=2
+" for cygwin
+"let g:airline_symbols = {}
+"let g:airline_left_sep = "\u2b80" "use double quotes here
+"let g:airline_left_alt_sep = "\u2b81"
+"let g:airline_right_sep = "\u2b82"
+"let g:airline_right_alt_sep = "\u2b83"
+"let g:airline_symbols.branch = "\u2b60"
+"let g:airline_symbols.readonly = "\u2b64"
+"let g:airline_symbols.linenr = "\u2b61"
+"for tmux
+"let g:tmuxline_powerline_separators = 1
+"let g:tmuxline_separators = {
+"    \ 'left' : "\u2b80",
+"    \ 'left_alt': "\u2b81",
+"    \ 'right' : "\u2b82",
+"    \ 'right_alt' : "\u2b83",
+"    \ 'space' : ' '}
+
 
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
@@ -83,7 +105,7 @@ let g:EasyMotion_use_smartsign_us = 1
 "let ycm_min_num_of_chars_for_completion = 1
 
 let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsUsePythonVersion = 2  "cygwin ycm+ultisnips fixing
+"let g:UltiSnipsUsePythonVersion = 2  "cygwin ycm+ultisnips fixing
 
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_map = '<leader>f'
@@ -127,10 +149,10 @@ set cursorline
 "endif
 
 "Cursor shape in insert mode in cygwin mintty
-let &t_ti.="\e[1 q"
-let &t_SI.="\e[5 q"
-let &t_EI.="\e[1 q"
-let &t_te.="\e[0 q"
+"let &t_ti.="\e[1 q"
+"let &t_SI.="\e[5 q"
+"let &t_EI.="\e[1 q"
+"let &t_te.="\e[0 q"
 
 set tabstop=2
 set shiftwidth=2
@@ -149,10 +171,6 @@ set showbreak=\ \ " comment  so that the whitespace work >.>
 set backspace=indent,eol,start
 "set formatoptions+=t
 set splitright
-
-set encoding=utf-8
-set fileencodings=utf-8,windows-1251
-set termencoding=utf-8
 
 set hlsearch
 set incsearch
@@ -197,7 +215,7 @@ function! RestoreCursorPos()
 endfunction
 
 nmap <leader>t :NERDTreeToggle<CR>
-let NERDTreeWinSize=20
+"let NERDTreeWinSize=20
 let NERDTreeShowHidden=0
 let NERDTreeQuitOnOpen = 1
 function! s:CloseIfOnlyNerdTreeLeft()
@@ -287,6 +305,11 @@ augroup vimrc_autocmd
   "autocmd BufReadPre *.js let b:javascript_lib_use_backbone = 1
   "autocmd BufReadPre *.js let b:javascript_lib_use_jasmine = 1
   "autocmd BufReadPre *.js let b:javascript_lib_use_angularjs = 1
+
+  "tmux window rename
+  "autocmd VimEnter * call system("tmux rename-window vim")
+  "autocmd VimLeave * call system("tmux rename-window bash")
+
 
 augroup END
 
