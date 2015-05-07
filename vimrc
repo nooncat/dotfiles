@@ -46,7 +46,11 @@ set background=dark
 set t_Co=16
 "let g:solarized_termcolors=256 "comment for Cygwin & gnome-terminal
 colorscheme solarized   "bug sets background to light in fbterm
-call togglebg#map("<F5>")
+call togglebg#map("<F3>")
+" unmap default plugins mapping  should unmap with plugin
+iunmap <F5>
+vunmap <F5>
+unmap <F5>
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -83,7 +87,7 @@ set laststatus=2
 let g:syntastic_check_on_open = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_aggregate_errors = 1
-let g:syntastic_javascript_checkers = ['jslint']
+let g:syntastic_javascript_checkers = ['jshint']
 
 let g:gitgutter_map_keys = 0
 
@@ -127,7 +131,7 @@ set autoread
 set novisualbell
 set noerrorbells
 set list
-set listchars=trail:·,tab:>-   ",eol:¬, trail:∙
+set listchars=trail:·,tab:>-   ",eol:¬
 set pastetoggle=<F4>
 "map q <Nop>  // turn off record mode
 
@@ -281,8 +285,8 @@ augroup vimrc_autocmd
   "autocmd BufLeave NERD_tree_* setlocal nocursorline
 
   "conque_term scrolloff reseting fix & trailing chars
-  autocmd BufLeave bash* set scrolloff=4
-  autocmd BufEnter bash* setlocal nolist
+  "autocmd BufLeave bash* set scrolloff=4
+  "autocmd BufEnter bash* setlocal nolist
 
   "NERDTree
   autocmd STdinReadPre * let s:std_in=1
@@ -299,6 +303,8 @@ augroup vimrc_autocmd
   "RestoreCursorPos
   autocmd BufWinEnter * call RestoreCursorPos()
 
+  "set html.eruby file type for html snippets working in eruby
+  autocmd BufNewFile,BufRead *.html.erb set filetype=html.eruby
   "javascriptlibraries enabling
   "autocmd BufReadPre *.js let b:javascript_lib_use_jquery = 1
   "autocmd BufReadPre *.js let b:javascript_lib_use_underscore = 1
