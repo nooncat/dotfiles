@@ -88,6 +88,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_javascript_checkers = ['jshint']
+"let g:syntastic_ruby_checkers       = ['rubocop', 'mri']
 
 let g:gitgutter_map_keys = 0
 
@@ -232,20 +233,20 @@ function! s:CloseIfOnlyNerdTreeLeft()
   endif
 endfunction
 
-set keymap=russian-jcukenwin
-set iminsert=0
-set imsearch=0
-cmap <silent> <C-A> <C-^>
-imap <silent> <C-A> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
-nmap <silent> <C-A> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
-vmap <silent> <C-A> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
-function MyKeyMapHighlight()
-  if &iminsert == 0
-    hi Vertsplit ctermbg=240 ctermfg=240
-  else
-    hi Vertsplit ctermbg=27 ctermfg=27
-  endif
-endfunction
+"set keymap=russian-jcukenwin
+"set iminsert=0
+"set imsearch=0
+"cmap <silent> <C-A> <C-^>
+"imap <silent> <C-A> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
+"nmap <silent> <C-A> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
+"vmap <silent> <C-A> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
+"function MyKeyMapHighlight()
+"  if &iminsert == 0
+"    hi Vertsplit ctermbg=240 ctermfg=240
+"  else
+"    hi Vertsplit ctermbg=27 ctermfg=27
+"  endif
+"endfunction
 
 imap <C-c> <Esc>:ConqueTerm bash<CR>
 nmap <C-c> :ConqueTerm bash<CR>
