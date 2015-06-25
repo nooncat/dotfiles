@@ -18,6 +18,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'slim-template/vim-slim'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'tpope/vim-endwise'
 
