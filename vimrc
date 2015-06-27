@@ -12,7 +12,6 @@ Plugin 'tpope/vim-rails'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
-"Plugin 'edkolev/tmuxline.vim'
 Plugin 'scrooloose/syntastic'   " sudo npm install -g jsint/jshint
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
@@ -48,7 +47,7 @@ set t_Co=16
 "let g:solarized_termcolors=256 "comment for Cygwin & gnome-terminal
 colorscheme solarized   "bug sets background to light in fbterm
 call togglebg#map("<F3>")
-" unmap default plugins mapping  should unmap with plugin
+" unmap default plugin's toggle mapping    it's bug: should unmap with plugin
 iunmap <F5>
 vunmap <F5>
 unmap <F5>
@@ -60,24 +59,6 @@ let g:airline_powerline_fonts = 1
 set ttimeoutlen=10
 set noshowmode
 set laststatus=2
-" for cygwin
-"let g:airline_symbols = {}
-"let g:airline_left_sep = "\u2b80" "use double quotes here
-"let g:airline_left_alt_sep = "\u2b81"
-"let g:airline_right_sep = "\u2b82"
-"let g:airline_right_alt_sep = "\u2b83"
-"let g:airline_symbols.branch = "\u2b60"
-"let g:airline_symbols.readonly = "\u2b64"
-"let g:airline_symbols.linenr = "\u2b61"
-"for tmux
-"let g:tmuxline_powerline_separators = 1
-"let g:tmuxline_separators = {
-"    \ 'left' : "\u2b80",
-"    \ 'left_alt': "\u2b81",
-"    \ 'right' : "\u2b82",
-"    \ 'right_alt' : "\u2b83",
-"    \ 'space' : ' '}
-
 
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
@@ -154,12 +135,6 @@ set cursorline
 "  highlight CursorColumn ctermbg=186
 "endif
 
-"Cursor shape in insert mode in cygwin mintty
-"let &t_ti.="\e[1 q"
-"let &t_SI.="\e[5 q"
-"let &t_EI.="\e[1 q"
-"let &t_te.="\e[0 q"
-
 set tabstop=2
 set shiftwidth=2
 set expandtab
@@ -224,16 +199,8 @@ nmap <leader>t :NERDTreeToggle<CR>
 "let NERDTreeWinSize=20
 let NERDTreeShowHidden=0
 let NERDTreeQuitOnOpen = 1
-function! s:CloseIfOnlyNerdTreeLeft()
-  if exists("t:NERDTreeBufName")
-    if bufwinnr(t:NERDTreeBufName) != -1
-      if winnr("$") == 1
-        q
-      endif
-    endif
-  endif
-endfunction
 
+" for russian key map in linux without GUI
 "set keymap=russian-jcukenwin
 "set iminsert=0
 "set imsearch=0
@@ -248,13 +215,6 @@ endfunction
 "    hi Vertsplit ctermbg=27 ctermfg=27
 "  endif
 "endfunction
-
-imap <C-c> <Esc>:ConqueTerm bash<CR>
-nmap <C-c> :ConqueTerm bash<CR>
-let g:ConqueTerm_InsertOnEnter = 0
-let g:ConqueTerm_ReadUnfocused = 1
-let g:ConqueTerm_CWInsert = 0
-"let g:ConqueTerm_Color = 1
 
 augroup vimrc_autocmd
   autocmd!
@@ -280,21 +240,16 @@ augroup vimrc_autocmd
   "  autocmd InsertLeave * highlight CursorColUmn ctermbg=186
   "endif
   "autocmd FileType nerdtree setlocal nocursorcolumn
-  "autocmd FileType conque_term setlocal nocursorcolumn nocursorline
   "autocmd BufEnter *.*,*file setlocal cursorline cursorcolumn
   "autocmd BufLeave *.*,*file setlocal nocursorline nocursorcolumn
   "autocmd BufEnter NERD_tree_* setlocal cursorline
   "autocmd BufLeave NERD_tree_* setlocal nocursorline
 
-  "conque_term scrolloff reseting fix & trailing chars
-  "autocmd BufLeave bash* set scrolloff=4
-  "autocmd BufEnter bash* setlocal nolist
-
   "NERDTree
   autocmd STdinReadPre * let s:std_in=1
   autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-  autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
   autocmd BufEnter NERD_tree_* nunmap H
   autocmd BufLeave NERD_tree_* nmap H :bp <CR>
   autocmd BufAdd * nmap H :bp <CR>
@@ -313,11 +268,6 @@ augroup vimrc_autocmd
   "autocmd BufReadPre *.js let b:javascript_lib_use_backbone = 1
   "autocmd BufReadPre *.js let b:javascript_lib_use_jasmine = 1
   "autocmd BufReadPre *.js let b:javascript_lib_use_angularjs = 1
-
-  "tmux window rename
-  "autocmd VimEnter * call system("tmux rename-window vim")
-  "autocmd VimLeave * call system("tmux rename-window bash")
-
 
 augroup END
 
