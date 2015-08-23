@@ -10,23 +10,26 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-rails'
 Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic'   " sudo npm install -g jsint/jshint
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'kchmck/vim-coffee-script'
 Plugin 'slim-template/vim-slim'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'tpope/vim-endwise'
+
+Plugin 'kien/ctrlp.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'rking/ag.vim'            " sudo apt-get install silversearcher-ag
 
 Plugin 'Valloric/YouCompleteMe'  "cd ~/.vim/bundle/YouCompleteMe  ./install.sh
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
 
 Plugin 'tpope/vim-repeat'
-Plugin 'Lokaltog/vim-easymotion'
 Plugin 'gregsexton/MatchTag'
 "Plugin 'tpope/vim-surround'
 "Plugin 'burnettk/vim-angular'
@@ -42,7 +45,7 @@ set lazyredraw
 set ttyfast
 set ttyscroll=3
 
-set background=dark
+set background=light
 set t_Co=16
 "let g:solarized_termcolors=256 "comment for Cygwin & gnome-terminal
 colorscheme solarized   "bug sets background to light in fbterm
@@ -194,6 +197,11 @@ function! RestoreCursorPos()
     return 1
   endif
 endfunction
+
+let g:ag_mapping_message=0
+let g:ag_highlight=1
+nnoremap <leader>a :Ag!<space>
+"nnoremap <leader>a :Ag! -Q <C-r>=expand('<cword>')<CR><CR>
 
 nmap <leader>t :NERDTreeToggle<CR>
 "let NERDTreeWinSize=20
