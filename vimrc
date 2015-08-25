@@ -11,7 +11,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-rails'
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
-Plugin 'scrooloose/syntastic'   " sudo npm install -g jsint/jshint
+Plugin 'scrooloose/syntastic'   " sudo npm install -g jslint/jshint
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
@@ -109,6 +109,7 @@ set undodir=~/.vim/undo/
 set scrolloff=4
 "set scrolljump=3
 set number
+set title
 set nobackup
 set noswapfile
 set showcmd
@@ -226,7 +227,8 @@ let NERDTreeQuitOnOpen = 1
 
 augroup vimrc_autocmd
   autocmd!
-  "Cursor shape in insert mode Gnome-terminal. Is need to compare profile names. Comment these lines in Cygwin.
+
+  "Cursor shape in insert mode Gnome-terminal.2.x(for 3 too important Default profile).
   au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
   au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
   au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
