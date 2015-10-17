@@ -1,6 +1,6 @@
 [user]
 	email = nooncat@yandex.ru
-	name = nooncat
+	name = nooncat (Vladimir Nikonorov)
 [push]
 	default = simple
 [alias]
@@ -13,3 +13,5 @@
   dump = cat-file -p
 [core]
 	editor = vim
+[merge]
+  conflictstyle = diff3
