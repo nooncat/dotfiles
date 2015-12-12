@@ -15,7 +15,8 @@ Plugin 'scrooloose/syntastic'   " sudo npm install -g jslint/jshint
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
-Plugin 'othree/javascript-libraries-syntax.vim'
+"Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'othree/yajs.vim'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'slim-template/vim-slim'
 Plugin 'jiangmiao/auto-pairs'
@@ -44,6 +45,7 @@ set lazyredraw
 "set synmaxcol=80
 set ttyfast
 set ttyscroll=3
+set mouse=a
 
 set background=light
 set t_Co=16
@@ -58,7 +60,7 @@ unmap <F5>
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_theme = 'luna'
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 set ttimeoutlen=10
 set noshowmode
 set laststatus=2
@@ -72,8 +74,9 @@ set laststatus=2
 let g:syntastic_check_on_open = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_aggregate_errors = 1
-let g:syntastic_javascript_checkers = ['jshint']
-"let g:syntastic_ruby_checkers       = ['rubocop', 'mri']
+let g:syntastic_javascript_checkers = ['jslint']
+let g:syntastic_ruby_checkers       = ['rubocop', 'mri']
+let g:syntastic_slim_checkers       = ['slim_lint']
 
 let g:gitgutter_map_keys = 0
 
@@ -149,7 +152,7 @@ set smartindent
 "set columns=80
 set wrap
 set linebreak
-let &colorcolumn=join(range(81,999),",")
+let &colorcolumn=join(range(101,999),",")
 
 set breakindent
 set showbreak=\ \ " comment  so that the whitespace work >.>
@@ -270,6 +273,8 @@ augroup vimrc_autocmd
   "RestoreCursorPos
   autocmd BufWinEnter * call RestoreCursorPos()
 
+  "set es6 highlighting
+  autocmd BufRead,BufNewFile *.es6 setfiletype javascript
   "set html.eruby file type for html snippets working in eruby
   autocmd BufNewFile,BufRead *.html.erb set filetype=html.eruby
   "javascriptlibraries enabling
