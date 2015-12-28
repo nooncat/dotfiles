@@ -22,7 +22,9 @@ Plugin 'slim-template/vim-slim'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'tpope/vim-endwise'
 
-Plugin 'kien/ctrlp.vim'
+Plugin 'szw/vim-ctrlspace'
+
+"Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'rking/ag.vim'            " sudo apt-get install silversearcher-ag
 
@@ -74,9 +76,11 @@ set laststatus=2
 let g:syntastic_check_on_open = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_aggregate_errors = 1
-let g:syntastic_javascript_checkers = ['jslint']
+"let g:syntastic_javascript_checkers = ['jslint']
+let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_ruby_checkers       = ['rubocop', 'mri']
 let g:syntastic_slim_checkers       = ['slim_lint']
+let g:syntastic_ignore_files = ['schema.rb']
 
 let g:gitgutter_map_keys = 0
 
@@ -100,11 +104,23 @@ let g:EasyMotion_use_smartsign_us = 1
 let g:UltiSnipsExpandTrigger="<c-j>"
 "let g:UltiSnipsUsePythonVersion = 2  "cygwin ycm+ultisnips fixing
 
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_map = '<leader>f'
+"let g:ctrlp_show_hidden = 1
+"let g:ctrlp_map = '<leader>f'
 
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
+
+let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
+let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+let g:CtrlSpaceSaveWorkspaceOnExit = 1
+let g:airline_exclude_preview = 1
+let g:CtrlSpaceIgnoredFiles = '\v(tmp|temp|public/uploads/)[\/]'
+let g:CtrlSpaceDefaultMappingKey = "<leader><Space>"
+"if executable("ag")
+"  let g:CtrlSpaceGlobCommand = 'ag --ignore=public/uploads/ -l --nocolor -g ""'
+"endif
+let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+nnoremap ,f :CtrlSpace O<CR>
 
 set undofile
 set undodir=~/.vim/undo/
@@ -112,6 +128,7 @@ set undodir=~/.vim/undo/
 set scrolloff=4
 "set scrolljump=3
 set number
+noremap <F2> :set invnumber<CR>
 set title
 set nobackup
 set noswapfile
