@@ -109,6 +109,19 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:ctrlp_map = '<leader>f'
 nnoremap <C-P> :CtrlPBuffer<CR>
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:ctrlp_buffer_func = { 'enter': 'CtrlPMappings'  }
+
+function! CtrlPMappings()
+  nnoremap <buffer> <silent> <C-@> :call <sid>DeleteBuffer()<cr>
+endfunction
+
+function! s:DeleteBuffer()
+  let path = fnamemodify(getline('.')[2:], ':p')
+  let bufn = matchstr(path, '\v\d+\ze\*No Name')
+  exec "bd" bufn ==# "" ? path : bufn
+  exec "norm \<F5>"
+endfunction
+
 
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
