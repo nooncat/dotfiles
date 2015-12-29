@@ -22,9 +22,10 @@ Plugin 'slim-template/vim-slim'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'tpope/vim-endwise'
 
-Plugin 'szw/vim-ctrlspace'
+"Plugin 'szw/vim-ctrlspace'
+Plugin 'wting/gitsessions.vim'
 
-"Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'rking/ag.vim'            " sudo apt-get install silversearcher-ag
 
@@ -105,22 +106,24 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 "let g:UltiSnipsUsePythonVersion = 2  "cygwin ycm+ultisnips fixing
 
 "let g:ctrlp_show_hidden = 1
-"let g:ctrlp_map = '<leader>f'
+let g:ctrlp_map = '<leader>f'
+nnoremap <C-P> :CtrlPBuffer<CR>
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
-let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
-let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
-let g:CtrlSpaceSaveWorkspaceOnExit = 1
-let g:airline_exclude_preview = 1
-let g:CtrlSpaceIgnoredFiles = '\v(tmp|temp|public/uploads/)[\/]'
-let g:CtrlSpaceDefaultMappingKey = "<leader><Space>"
+"let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
+"let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+"let g:CtrlSpaceSaveWorkspaceOnExit = 1
+"let g:airline_exclude_preview = 1
+"let g:CtrlSpaceIgnoredFiles = '\v(tmp|temp|public/uploads/)[\/]'
+"let g:CtrlSpaceDefaultMappingKey = "<leader><Space>"
 "if executable("ag")
 "  let g:CtrlSpaceGlobCommand = 'ag --ignore=public/uploads/ -l --nocolor -g ""'
 "endif
-let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
-nnoremap ,f :CtrlSpace O<CR>
+"let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+"nnoremap ,f :CtrlSpace O<CR>
 
 set undofile
 set undodir=~/.vim/undo/
@@ -211,6 +214,10 @@ nmap H :bp <CR>
 nmap L :bn <CR>
 nmap U :b#<BAR>bd#<BAR>b<CR>
 
+nnoremap <leader>gss :GitSessionSave<cr>
+nnoremap <leader>gsl :GitSessionLoad<cr>
+nnoremap <leader>gsd :GitSessionDelete<cr>
+
 set viminfo='250,h
 function! RestoreCursorPos()
   if line("'\"") <= line("$")
@@ -276,10 +283,14 @@ augroup vimrc_autocmd
   "autocmd BufLeave NERD_tree_* setlocal nocursorline
 
   "NERDTree
-  autocmd STdinReadPre * let s:std_in=1
-  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+  "auto open NERDTree when no files specified (comment out because conficting
+  "with gitsessions plugin)
+  "autocmd STdinReadPre * let s:std_in=1
+  "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
+  "close Vim if only NERDTree buffer remain
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+  " unmap for prevent NERDTree buffer switching
   autocmd BufEnter NERD_tree_* nunmap H
   autocmd BufLeave NERD_tree_* nmap H :bp <CR>
   autocmd BufAdd * nmap H :bp <CR>
