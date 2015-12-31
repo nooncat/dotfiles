@@ -1,2 +1,18 @@
-set show-mode-in-prompt on
+$include /etc/inputrc
+
+# set show-mode-in-prompt on
 set editing-mode vi
+
+$if mode=vi
+  set keymap vi-command
+  # these are for vi-command mode
+  Control-p history-search-backward
+  Control-n history-search-forward
+  Control-l: clear-screen
+
+  set keymap vi-insert
+  # these are for vi-insert mode
+  Control-p history-search-backward
+  Control-n history-search-forward
+  Control-l: clear-screen
+$endif
