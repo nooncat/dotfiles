@@ -22,12 +22,12 @@ Plugin 'slim-template/vim-slim'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'tpope/vim-endwise'
 
-"Plugin 'szw/vim-ctrlspace'
 Plugin 'wting/gitsessions.vim'
 
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'rking/ag.vim'            " sudo apt-get install silversearcher-ag
+Plugin 'rking/ag.vim'  " build from source https://github.com/ggreer/the_silver_searcher
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimproc.vim'
 
 Plugin 'Valloric/YouCompleteMe'  "cd ~/.vim/bundle/YouCompleteMe  ./install.sh
 Plugin 'honza/vim-snippets'
@@ -60,83 +60,8 @@ iunmap <F5>
 vunmap <F5>
 unmap <F5>
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_theme = 'luna'
-let g:airline_powerline_fonts = 0
-set ttimeoutlen=10
-set noshowmode
-set laststatus=2
-
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_lock_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_loc_list_height = 8
-let g:syntastic_check_on_open = 1
-let g:syntastic_enable_signs = 1
-let g:syntastic_aggregate_errors = 1
-"let g:syntastic_javascript_checkers = ['jslint']
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_ruby_checkers       = ['rubocop', 'mri']
-let g:syntastic_slim_checkers       = ['slim_lint']
-let g:syntastic_ignore_files = ['schema.rb']
-
-let g:gitgutter_map_keys = 0
-
-let g:EasyMotion_do_mapping = 0
-nmap s <Plug>(easymotion-s2)
-let g:EasyMotion_use_upper = 1
-let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
-let g:EasyMotion_smartcase=1
-let g:EasyMotion_use_smartsign_us = 1
-"map  / <Plug>(easymotion-sn)
-"map  n <Plug>(easymotion-next)
-"map  N <Plug>(easymotion-prev)
-"map <Leader>l <Plug>(easymotion-lineforward)
-"map <Leader>j <Plug>(easymotion-j)
-"map <Leader>k <Plug>(easymotion-k)
-"map <Leader>h <Plug>(easymotion-linebackward)
-"let g:EasyMotion_startofline = 0
-
-"let ycm_min_num_of_chars_for_completion = 1
-
-let g:UltiSnipsExpandTrigger="<c-j>"
-"let g:UltiSnipsUsePythonVersion = 2  "cygwin ycm+ultisnips fixing
-
-"let g:ctrlp_show_hidden = 1
-let g:ctrlp_map = '<leader>f'
-nnoremap <C-P> :CtrlPBuffer<CR>
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-let g:ctrlp_buffer_func = { 'enter': 'CtrlPMappings'  }
-
-function! CtrlPMappings()
-  nnoremap <buffer> <silent> <C-@> :call <sid>DeleteBuffer()<cr>
-endfunction
-
-function! s:DeleteBuffer()
-  let path = fnamemodify(getline('.')[2:], ':p')
-  let bufn = matchstr(path, '\v\d+\ze\*No Name')
-  exec "bd" bufn ==# "" ? path : bufn
-  exec "norm \<F5>"
-endfunction
-
-
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
-
-"let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
-"let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
-"let g:CtrlSpaceSaveWorkspaceOnExit = 1
-"let g:airline_exclude_preview = 1
-"let g:CtrlSpaceIgnoredFiles = '\v(tmp|temp|public/uploads/)[\/]'
-"let g:CtrlSpaceDefaultMappingKey = "<leader><Space>"
-"if executable("ag")
-"  let g:CtrlSpaceGlobCommand = 'ag --ignore=public/uploads/ -l --nocolor -g ""'
-"endif
-"let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
-"nnoremap ,f :CtrlSpace O<CR>
 
 set undofile
 set undodir=~/.vim/undo/
@@ -161,20 +86,7 @@ set pastetoggle=<F4>
 set wildmenu
 set wildmode=longest:full,full
 
-"highlight SignColumn   ctermbg=234  //or fix Solarized.vim str.657 to: exe hi! SignColumn" .s:fmt_none .s:fg_blue .s:bg_none
-
-"highlight CursorLine   ctermbg=236
-"highlight CursorColumn ctermbg=236
 set cursorline
-"set cursorcolumn
-"if &background=="dark"
-"  highlight CursorLine   ctermbg=236
-"  highlight CursorColumn ctermbg=236
-"else
-"  highlight CursorLine   ctermbg=186
-"  highlight CursorColumn ctermbg=186
-"endif
-
 set tabstop=2
 set shiftwidth=2
 set expandtab
@@ -191,7 +103,6 @@ set breakindent
 set showbreak=\ \ " comment  so that the whitespace work >.>
 set backspace=indent,eol,start
 "set formatoptions+=t
-set splitright
 
 set hlsearch
 set incsearch
@@ -222,6 +133,12 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+nnoremap nv :vsplit<CR>
+nnoremap ns :split<CR>
+nnoremap no <C-w>o
+set splitbelow
+set splitright
+
 "section need to change in autocomand nerdtree too
 nmap H :bp <CR>
 nmap L :bn <CR>
@@ -248,6 +165,42 @@ nmap <leader>t :NERDTreeToggle<CR>
 "let NERDTreeWinSize=20
 let NERDTreeShowHidden=0
 let NERDTreeQuitOnOpen = 1
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_theme = 'luna'
+let g:airline_powerline_fonts = 0
+set ttimeoutlen=10
+set noshowmode
+set laststatus=2
+
+let g:syntastic_check_on_open = 1
+let g:syntastic_enable_signs = 1
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_ruby_checkers       = ['rubocop', 'mri']
+let g:syntastic_slim_checkers       = ['slim_lint']
+let g:syntastic_ignore_files = ['schema.rb']
+
+let g:gitgutter_map_keys = 0
+
+let g:EasyMotion_do_mapping = 0
+nmap s <Plug>(easymotion-s2)
+let g:EasyMotion_use_upper = 1
+let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
+let g:EasyMotion_smartcase=1
+let g:EasyMotion_use_smartsign_us = 1
+
+"let ycm_min_num_of_chars_for_completion = 1
+
+let g:UltiSnipsExpandTrigger="<c-j>"
+"let g:UltiSnipsUsePythonVersion = 2  "cygwin ycm+ultisnips fixing
+
+let g:unite_split_rule = 'botright'
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup', '-g', '']
+nnoremap ,f :<C-u>Unite -start-insert file_rec/async:!<CR>
+nnoremap <silent> ,g :<C-u>Unite buffer<CR>
 
 " for russian key map in linux without GUI
 "set keymap=russian-jcukenwin
