@@ -22,7 +22,7 @@ Plugin 'slim-template/vim-slim'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'tpope/vim-endwise'
 
-Plugin 'wting/gitsessions.vim'
+"Plugin 'wting/gitsessions.vim'
 
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'rking/ag.vim'  " build from source https://github.com/ggreer/the_silver_searcher
@@ -133,9 +133,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-nnoremap nv :vsplit<CR>
-nnoremap ns :split<CR>
-nnoremap no <C-w>o
+nnoremap mv :vsplit<CR>
+nnoremap ms :split<CR>
+nnoremap mo <C-w>o
+nnoremap md <C-w>q
 set splitbelow
 set splitright
 
@@ -162,6 +163,7 @@ nnoremap <leader>a :Ag!<space>
 "nnoremap <leader>a :Ag! -Q <C-r>=expand('<cword>')<CR><CR>
 
 nmap <leader>t :NERDTreeToggle<CR>
+nmap <leader>r :NERDTreeFind<CR>
 "let NERDTreeWinSize=20
 let NERDTreeShowHidden=0
 let NERDTreeQuitOnOpen = 1
@@ -199,8 +201,8 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:unite_split_rule = 'botright'
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup', '-g', '']
-nnoremap ,f :<C-u>Unite -start-insert file_rec/async:!<CR>
-nnoremap <silent> ,g :<C-u>Unite buffer<CR>
+nnoremap <leader>f :<C-u>Unite -start-insert file_rec/async:!<CR>
+nnoremap <silent> <leader>g :<C-u>Unite buffer<CR>
 
 " for russian key map in linux without GUI
 "set keymap=russian-jcukenwin
