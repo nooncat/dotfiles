@@ -12,7 +12,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic'   " sudo npm install -g jslint/jshint
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'nooncat/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 "Plugin 'othree/javascript-libraries-syntax.vim'
@@ -50,7 +50,12 @@ set ttyfast
 set ttyscroll=3
 set mouse=a
 
-set background=light
+if system("gconftool-2 --get '/apps/gnome-terminal/profiles/Default/background_color'") == "#fdfdf6f6e3e3\n"
+  set background=light
+else
+  set background=dark
+endif
+
 set t_Co=16
 "let g:solarized_termcolors=256 "comment for Cygwin & gnome-terminal
 colorscheme solarized   "bug sets background to light in fbterm
@@ -133,10 +138,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-nnoremap mv :vsplit<CR>
-nnoremap ms :split<CR>
-nnoremap mo <C-w>o
-nnoremap md <C-w>q
+nnoremap bv :vsplit<CR>
+nnoremap bs :split<CR>
+nnoremap bo <C-w>o
+nnoremap bd <C-w>q
 set splitbelow
 set splitright
 
