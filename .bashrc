@@ -118,8 +118,13 @@ fi
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWUPSTREAM="auto"
-PS1='\[\e[1;33m\]\u@\h\[\e[0;32m\]:\w\[\e[0;33m\]$(__git_ps1)\[\e[0;32m\]\$\[\e[00m\] '
+PS1='\[\e[1;33m\]\u@\h\[\e[0;32m\]:\w\[\e[0;33m\]$(__git_ps1)\[\e[0;32m\]\n-\$\[\e[00m\] '
 
+#complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null || complete -o default -o nospace -F _git g
+alias g='git'
+source /usr/share/bash-completion/completions/git
+complete -o default -o nospace -F _git g
 
 EDITOR=vim
+
 source /home/kom/.rvm/scripts/rvm
