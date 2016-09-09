@@ -15,7 +15,7 @@ Plugin 'scrooloose/syntastic'   " sudo npm install -g jslint/jshint
 Plugin 'nooncat/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
-"Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'othree/yajs.vim'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'slim-template/vim-slim'
@@ -165,18 +165,20 @@ endfunction
 let g:ag_mapping_message=0
 let g:ag_highlight=1
 nnoremap <leader>a :Ag!<space>
-"nnoremap <leader>a :Ag! -Q <C-r>=expand('<cword>')<CR><CR>
+nnoremap <leader>* :Ag! -Q <C-r>=expand('<cword>')<CR><CR>
 
 nmap <leader>t :NERDTreeToggle<CR>
 nmap <leader>r :NERDTreeFind<CR>
-"let NERDTreeWinSize=20
-let NERDTreeShowHidden=0
+"let NERDTreeWinSize = 20
+let NERDTreeShowHidden = 0
 let NERDTreeQuitOnOpen = 1
+"let NERDTreeAutoDeleteBuffer = 1
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_theme = 'luna'
 let g:airline_powerline_fonts = 0
+let g:airline#extensions#branch#displayed_head_limit = 10
 set ttimeoutlen=10
 set noshowmode
 set laststatus=2
@@ -282,7 +284,7 @@ augroup vimrc_autocmd
   "autocmd BufReadPre *.js let b:javascript_lib_use_jquery = 1
   "autocmd BufReadPre *.js let b:javascript_lib_use_underscore = 1
   "autocmd BufReadPre *.js let b:javascript_lib_use_backbone = 1
-  "autocmd BufReadPre *.js let b:javascript_lib_use_jasmine = 1
+  autocmd BufReadPre *.js let b:javascript_lib_use_jasmine = 1
   "autocmd BufReadPre *.js let b:javascript_lib_use_angularjs = 1
 
 augroup END
