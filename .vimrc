@@ -10,7 +10,8 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-rails'
 Plugin 'scrooloose/nerdtree'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/syntastic'   " sudo npm install -g jslint/jshint
 Plugin 'nooncat/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
@@ -26,6 +27,7 @@ Plugin 'jiangmiao/auto-pairs'
 
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'rking/ag.vim'  " build from source https://github.com/ggreer/the_silver_searcher
+"Plugin 'mileszs/ack.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimproc.vim'
 
@@ -33,10 +35,11 @@ Plugin 'Valloric/YouCompleteMe'  "cd ~/.vim/bundle/YouCompleteMe  ./install.sh
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
 
-Plugin 'tpope/vim-repeat'
 Plugin 'gregsexton/MatchTag'
+"Plugin 'tpope/vim-repeat'
 "Plugin 'tpope/vim-surround'
 "Plugin 'burnettk/vim-angular'
+"Plugin 'lyokha/vim-xkbswitch' http://www.pvsm.ru/vim/31398/print/ not work
 
 call vundle#end()
 filetype plugin indent on
@@ -84,7 +87,7 @@ set autoread
 set novisualbell
 set noerrorbells
 set list
-set listchars=trail:·,tab:>-   ",eol:¬
+set listchars=trail:·,tab:>-,nbsp:┄   ",eol:¬
 set pastetoggle=<F4>
 "map q <Nop>  // turn off record mode
 
@@ -119,6 +122,7 @@ vnoremap * y :execute ":let @/=@\""<CR> :execute"set hlsearch"<CR>
 
 let mapleader = ","
 nnoremap <leader>s :shell<CR>
+nnoremap <leader>c :Rails console<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 
@@ -150,9 +154,9 @@ nmap H :bp <CR>
 nmap L :bn <CR>
 nmap U :b#<BAR>bd#<BAR>b<CR>
 
-nnoremap <leader>gss :GitSessionSave<cr>
-nnoremap <leader>gsl :GitSessionLoad<cr>
-nnoremap <leader>gsd :GitSessionDelete<cr>
+"nnoremap <leader>gss :GitSessionSave<cr>
+"nnoremap <leader>gsl :GitSessionLoad<cr>
+"nnoremap <leader>gsd :GitSessionDelete<cr>
 
 set viminfo='250,h
 function! RestoreCursorPos()
@@ -166,6 +170,8 @@ let g:ag_mapping_message=0
 let g:ag_highlight=1
 nnoremap <leader>a :Ag!<space>
 nnoremap <leader>* :Ag! -Q <C-r>=expand('<cword>')<CR><CR>
+"nnoremap <leader>a :Ack!<space>
+"nnoremap <leader>* :Ack! -Q <C-r>=expand('<cword>')<CR><CR>
 
 nmap <leader>t :NERDTreeToggle<CR>
 nmap <leader>r :NERDTreeFind<CR>
@@ -210,6 +216,10 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup', '-g', '']
 nnoremap <leader>f :<C-u>Unite -start-insert file_rec/async:!<CR>
 nnoremap <silent> <leader>g :<C-u>Unite buffer<CR>
+
+"let g:XkbSwitchEnabled = 1
+"let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.so'
+"let g:XkbSwitchIMappings = ['ru']
 
 " for russian key map in linux without GUI
 "set keymap=russian-jcukenwin
@@ -260,8 +270,8 @@ augroup vimrc_autocmd
   "NERDTree
   "auto open NERDTree when no files specified (comment out because conficting
   "with gitsessions plugin)
-  "autocmd STdinReadPre * let s:std_in=1
-  "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+  autocmd STdinReadPre * let s:std_in=1
+  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
   "close Vim if only NERDTree buffer remain
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
