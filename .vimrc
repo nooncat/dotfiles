@@ -29,7 +29,7 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'rking/ag.vim'  " build from source https://github.com/ggreer/the_silver_searcher
 "Plugin 'mileszs/ack.vim'
 Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/vimproc.vim' " cd ~/.vim/bundle/vimproc.vim  make
 
 Plugin 'Valloric/YouCompleteMe'  "cd ~/.vim/bundle/YouCompleteMe  ./install.sh
 Plugin 'honza/vim-snippets'
@@ -53,11 +53,11 @@ set ttyfast
 set ttyscroll=3
 set mouse=a
 
-if system("gconftool-2 --get '/apps/gnome-terminal/profiles/Default/background_color'") == "#fdfdf6f6e3e3\n"
-  set background=light
-else
-  set background=dark
-endif
+"if system("gconftool-2 --get '/apps/gnome-terminal/profiles/Default/background_color'") == "#fdfdf6f6e3e3\n"
+set background=light
+"else
+"  set background=dark
+"endif
 
 set t_Co=16
 "let g:solarized_termcolors=256 "comment for Cygwin & gnome-terminal
