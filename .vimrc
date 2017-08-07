@@ -53,11 +53,12 @@ set ttyfast
 set ttyscroll=3
 set mouse=a
 
-"if system("gconftool-2 --get '/apps/gnome-terminal/profiles/Default/background_color'") == "#fdfdf6f6e3e3\n"
-set background=light
-"else
-"  set background=dark
-"endif
+ " au InsertEnter * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' cursor-shape ibeam"
+if system("gsettings get 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' background-color") == "#fdfdf6f6e3e3\n"
+  set background=light
+else
+  set background=dark
+endif
 
 set t_Co=16
 "let g:solarized_termcolors=256 "comment for Cygwin & gnome-terminal
@@ -240,10 +241,17 @@ nnoremap <silent> <leader>g :<C-u>Unite buffer<CR>
 augroup vimrc_autocmd
   autocmd!
 
+  " for Ubuntu < 15
   "Cursor shape in insert mode Gnome-terminal.2.x(for 3 too important Default profile).
-  au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-  au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
-  au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+  "au InsertEnter * silent execute '!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam'
+  "au InsertLeave * silent execute '!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block'
+  "au VimLeave * silent execute '!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block'
+
+  " for Ubuntu >= 15
+  " https://askubuntu.com/questions/731774/how-to-change-gnome-terminal-profile-preferences-using-dconf-or-gsettings
+  au InsertEnter * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' cursor-shape ibeam"
+  au InsertLeave * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' cursor-shape block"
+  au VimLeave * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' cursor-shape block"
 
   "cursor for server linux
   "  autocmd InsertEnter * highlight CursorLine   ctermbg=233
