@@ -212,11 +212,13 @@ let g:EasyMotion_use_smartsign_us = 1
 let g:UltiSnipsExpandTrigger="<c-j>"
 "let g:UltiSnipsUsePythonVersion = 2  "cygwin ycm+ultisnips fixing
 
+let g:unite_winheight = 35
 let g:unite_split_rule = 'botright'
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup', '-g', '']
 nnoremap <leader>f :<C-u>Unite -start-insert file_rec/async:!<CR>
 nnoremap <silent> <leader>g :<C-u>Unite buffer<CR>
+" Ctrl-l unite_redraw / clear cache
 
 "let g:XkbSwitchEnabled = 1
 "let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.so'
