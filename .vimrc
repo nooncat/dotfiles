@@ -185,7 +185,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_theme = 'luna'
 let g:airline_powerline_fonts = 0
-let g:airline#extensions#branch#displayed_head_limit = 11
+let g:airline#extensions#branch#displayed_head_limit = 12
 set ttimeoutlen=10
 set noshowmode
 set laststatus=2
