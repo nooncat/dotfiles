@@ -185,18 +185,20 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_theme = 'luna'
 let g:airline_powerline_fonts = 0
-let g:airline#extensions#branch#displayed_head_limit = 10
+let g:airline#extensions#branch#displayed_head_limit = 11
 set ttimeoutlen=10
 set noshowmode
 set laststatus=2
 
-let g:syntastic_check_on_open = 1
-let g:syntastic_enable_signs = 1
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_ruby_checkers       = ['rubocop', 'mri']
-let g:syntastic_slim_checkers       = ['slim_lint']
-let g:syntastic_ignore_files = ['schema.rb']
+let g:syntastic_check_on_open        = 1
+let g:syntastic_enable_signs         = 1
+let g:syntastic_aggregate_errors     = 1
+let g:syntastic_javascript_checkers  = ['jshint']
+let g:syntastic_ruby_checker         = ['rubocop', 'mri']
+"let g:syntastic_slim_checkers       = ['slim']
+let g:syntastic_slim_checkers        = ['slim_link', 'slimrb']
+let g:syntastic_coffee_checkers = ['coffee_jshint',  'coffeelint']
+let g:syntastic_ignore_files         = ['schema.rb']
 
 let g:gitgutter_map_keys = 0
 
