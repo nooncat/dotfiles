@@ -16,8 +16,10 @@ Plugin 'scrooloose/syntastic'   " sudo npm install -g jslint/jshint
 Plugin 'nooncat/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'othree/yajs.vim'
+"Plugin 'othree/javascript-libraries-syntax.vim'
+"Plugin 'othree/yajs.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'slim-template/vim-slim'
 Plugin 'jiangmiao/auto-pairs'
@@ -194,10 +196,12 @@ let g:syntastic_check_on_open        = 1
 let g:syntastic_enable_signs         = 1
 let g:syntastic_aggregate_errors     = 1
 let g:syntastic_javascript_checkers  = ['jshint']
-let g:syntastic_ruby_checker         = ['rubocop', 'mri']
+let g:syntastic_ruby_checkers         = ['rubocop', 'mri']
 "let g:syntastic_slim_checkers       = ['slim']
 let g:syntastic_slim_checkers        = ['slim_link', 'slimrb']
 let g:syntastic_coffee_checkers = ['coffee_jshint',  'coffeelint']
+"let g:syntastic_javascript_checkers = ['jsxhint']
+"let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
 let g:syntastic_ignore_files         = ['schema.rb']
 
 let g:gitgutter_map_keys = 0
