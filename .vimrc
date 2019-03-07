@@ -315,6 +315,9 @@ augroup vimrc_autocmd
   autocmd BufReadPre *.js let b:javascript_lib_use_jasmine = 1
   "autocmd BufReadPre *.js let b:javascript_lib_use_angularjs = 1
 
+  "for vim-slim right filetype detection with 'doctype html header' slim file
+  autocmd BufNewFile,BufRead *.slim setlocal filetype=slim
+
 augroup END
 
 "СЪЕШЬ ЕЩЕ ЭТИХ МЯГКИХ ФРАНЦУЗКИХ БУЛОЧЕК И ВЫПЕЙ ЧАЮ съешь еще этих мягких французких булочек и выпей чаю
