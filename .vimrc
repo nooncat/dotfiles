@@ -213,7 +213,8 @@ set laststatus=2
 "let g:syntastic_ignore_files            = ['schema.rb']
 
 let g:ale_linters = {
-\  'ruby': ['rubocop', 'mri']
+\  'ruby': ['rubocop', 'mri'],
+\  'javascript': ['jshint'],
 \}
 
 let g:gitgutter_map_keys = 0
@@ -327,6 +328,9 @@ augroup vimrc_autocmd
 
   "for vim-slim right filetype detection with 'doctype html header' slim file
   autocmd BufNewFile,BufRead *.slim setlocal filetype=slim
+
+  "update diffs when save file
+  autocmd BufWritePost * GitGutter
 
 augroup END
 
