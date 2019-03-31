@@ -56,8 +56,10 @@ set ttyfast
 set ttyscroll=3
 set mouse=a
 
- " au InsertEnter * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' cursor-shape ibeam"
-if system("gsettings get 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' background-color") == "#fdfdf6f6e3e3\n"
+"this was before gnome-terminal 3.18.3
+"if system("gconftool-2 --get '/apps/gnome-terminal/profiles/Default/background_color'") == "#fdfdf6f6e3e3\n"
+
+if system("gsettings get 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' background-color") == "'#fdfdf6f6e3e3'\n"
   set background=light
 else
   set background=dark
@@ -165,7 +167,7 @@ nmap U :b#<BAR>bd#<BAR>b<CR>
 set viminfo='250,h
 function! RestoreCursorPos()
   if line("'\"") <= line("$")
-    normal!  g'"
+    normal! g'"
     return 1
   endif
 endfunction
