@@ -130,7 +130,6 @@ vnoremap * y :execute ":let @/=@\""<CR> :execute"set hlsearch"<CR>
 
 let mapleader = ","
 nnoremap <leader>s :shell<CR>
-nnoremap <leader>c :Rails console<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 
@@ -237,6 +236,7 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] [%severity%] %s'
 
 let g:gitgutter_map_keys = 0
+set updatetime=300
 
 let g:EasyMotion_do_mapping = 0
 nmap s <Plug>(easymotion-s2)
@@ -320,7 +320,7 @@ augroup vimrc_autocmd
   autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
   "close Vim if only NERDTree buffer remain
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+  autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
   " unmap for prevent NERDTree buffer switching
   autocmd BufEnter NERD_tree_* nunmap H
   autocmd BufLeave NERD_tree_* nmap H :bp <CR>
@@ -346,8 +346,10 @@ augroup vimrc_autocmd
   "for vim-slim right filetype detection with 'doctype html header' slim file
   autocmd BufNewFile,BufRead *.slim setlocal filetype=slim
 
-  "update diffs when save file
+  "update signcolumn diffs when save file
   autocmd BufWritePost * GitGutter
+  "update signcolumn diffs when switch buffer
+  autocmd BufEnter * GitGutter
 augroup END
 
 "СЪЕШЬ ЕЩЕ ЭТИХ МЯГКИХ ФРАНЦУЗКИХ БУЛОЧЕК И ВЫПЕЙ ЧАЮ съешь еще этих мягких французких булочек и выпей чаю
