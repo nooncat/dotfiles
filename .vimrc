@@ -348,8 +348,10 @@ augroup vimrc_autocmd
 
   "update signcolumn diffs when save file
   autocmd BufWritePost * GitGutter
+  "update signcolumn diffs when exit from :shell
+  autocmd CursorHold * GitGutter
   "update signcolumn diffs when switch buffer
-  autocmd BufEnter * GitGutter
+  "autocmd BufEnter * GitGutter
 augroup END
 
 "СЪЕШЬ ЕЩЕ ЭТИХ МЯГКИХ ФРАНЦУЗКИХ БУЛОЧЕК И ВЫПЕЙ ЧАЮ съешь еще этих мягких французких булочек и выпей чаю
