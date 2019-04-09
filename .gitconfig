@@ -1,5 +1,5 @@
 [user]
-  email = vn@cifronomika.ru
+  email = nooncat@yandex.ru
   name = Vladimir Nikonorov
 [push]
   default = simple
@@ -16,3 +16,6 @@
   editor = vim
 [merge]
   conflictstyle = diff3
+[http]
+	sslCAinfo = /etc/ssl/certs/ca-certificates.crt
+	sslverify = true

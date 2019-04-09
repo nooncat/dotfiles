@@ -2,7 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 # run new gnome-tab(window) with same cwd:
-. /etc/profile.d/vte.sh
+#. /etc/profile.d/vte.sh
 
 # If not running interactively, don't do anything
 case $- in
@@ -128,3 +128,15 @@ complete -o default -o nospace -F _git g
 EDITOR=vim
 
 source /home/kom/.rvm/scripts/rvm
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+# function to set terminal title
+function set-title(){
+  if [[ -z "$ORIG" ]]; then
+    ORIG=$PS1
+  fi
+  TITLE="\[\e]2;$*\a\]"
+  PS1=${ORIG}${TITLE}
+}
