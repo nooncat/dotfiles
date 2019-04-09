@@ -42,7 +42,9 @@ Plugin 'gregsexton/MatchTag'
 "Plugin 'tpope/vim-repeat'
 "Plugin 'tpope/vim-surround'
 "Plugin 'burnettk/vim-angular'
-"Plugin 'lyokha/vim-xkbswitch' http://www.pvsm.ru/vim/31398/print/ not work
+Plugin 'lyokha/vim-xkbswitch' " http://www.pvsm.ru/vim/31398/print/ not work
+"https://github.com/ierton/xkb-switch/issues/15 not working because gnome-terminal bug
+"using only for showing current keyboard layout in vim-airline
 
 call vundle#end()
 filetype plugin indent on
@@ -226,8 +228,9 @@ set laststatus=2
 "let g:syntastic_ignore_files            = ['schema.rb']
 
 let g:ale_linters = {
-\  'ruby': ['rubocop', 'mri'],
+\  'ruby':       ['rubocop', 'mri'],
 \  'javascript': ['jshint'],
+\  'slim':       ['slimlint']
 \}
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
@@ -256,8 +259,6 @@ nnoremap <silent> <leader>g :<C-u>Unite buffer<CR>
 " Ctrl-l unite_redraw / clear cache
 
 "let g:XkbSwitchEnabled = 1
-"let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.so'
-"let g:XkbSwitchIMappings = ['ru']
 
 " for russian key map in linux without GUI
 "set keymap=russian-jcukenwin
