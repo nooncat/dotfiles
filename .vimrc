@@ -12,8 +12,8 @@ Plugin 'tpope/vim-rails'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+" check ale others functions
 Plugin 'w0rp/ale'
-"Plugin 'scrooloose/syntastic'   " sudo npm install -g jslint/jshint
 Plugin 'nooncat/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
@@ -207,25 +207,6 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 set ttimeoutlen=10
 set noshowmode
 set laststatus=2
-
-" syntastic debug
-" :let g:syntastic_debug = 1 " or 3 or 33
-" :SyntasticCheck mri rubocop
-" :messages
-
-"let g:syntastic_check_on_open           = 1
-"let g:syntastic_enable_signs            = 1
-"let g:syntastic_aggregate_errors        = 1
-"let g:syntastic_check_on_wq             = 0
-"let g:syntastic_javascript_checkers     = ['jshint']
-"let g:syntastic_ruby_checkers           = ['rubocop', 'mri']
-"let g:syntastic_slim_checkers           = ['slim']
-"let g:syntastic_slim_checkers           = ['slim_link', 'slimrb']
-"let g:syntastic_coffee_checkers         = ['coffee_jshint',  'coffeelint']
-"let g:syntastic_coffee_checkers         = ['coffee_jshint']
-"let g:syntastic_javascript_checkers     = ['jsxhint']
-"let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
-"let g:syntastic_ignore_files            = ['schema.rb']
 
 let g:ale_linters = {
 \  'ruby':       ['rubocop', 'mri'],
