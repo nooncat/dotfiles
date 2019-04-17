@@ -97,7 +97,8 @@ set noerrorbells
 set list
 set listchars=trail:·,tab:>-,nbsp:┄   ",eol:¬
 set pastetoggle=<F4>
-"map q <Nop>  // turn off record mode
+" turn off record mode
+map q <Nop>
 
 set wildmenu
 set wildmode=longest:full,full
@@ -352,6 +353,12 @@ augroup vimrc_autocmd
   autocmd CursorHold * GitGutter
   "update signcolumn diffs when switch buffer
   "autocmd BufEnter * GitGutter
+
+  "prevent scroll on buf switch
+  if v:version >= 700
+    au BufLeave * let b:winview = winsaveview()
+    au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+  endif
 augroup END
 
 "СЪЕШЬ ЕЩЕ ЭТИХ МЯГКИХ ФРАНЦУЗКИХ БУЛОЧЕК И ВЫПЕЙ ЧАЮ съешь еще этих мягких французких булочек и выпей чаю
