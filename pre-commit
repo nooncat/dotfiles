@@ -8,7 +8,7 @@ grey='\033[0m'
 
 errors=false
 
-echo "${green}Running Git pre-commit hook...${grey}\n"
+echo "${green}Running Git pre-commit hook...\n${grey}"
 
 check_files_with_linter () {
   echo "${green}[$3 Style][Info]: Checking $3 style with $2${grey}"
@@ -20,13 +20,13 @@ check_files_with_linter () {
     bundle exec "$2" $1
 
     if [ $? -ne 0 ]; then
-      echo "${red}[$3 Style][Error]: Please, fix the issues and commit again${grey}\n"
+      echo "${red}[$3 Style][Error]: Please, fix the issues and commit again\n${grey}"
       errors=true
     else
       echo "${green}[$3 Style][Info]: Checking passed\n"
     fi
   else
-    echo "${green}[$3 Style][Info]: No files to check${grey}\n"
+    echo "${green}[$3 Style][Info]: No files to check\n${grey}"
   fi
 }
 
@@ -45,7 +45,7 @@ if bundle exec slim-lint -v >/dev/null 2>&1; then
 
   check_files_with_linter "$slim_files" "slim-lint" "Slim"
 else
-  echo >&2 "${red}[Slim Style][Fatal]: Please, add slim-lint gem to your Gemfile\n"
+  echo >&2 "${red}[Slim Style][Fatal]: Please, add slim-lint gem to your Gemfile\n${grey}"
   errors=true
 fi
 
@@ -64,7 +64,7 @@ if bundle exec jshint -v >/dev/null 2>&1; then
 
   check_files_with_linter "$js_files" "jshint" "Javascript"
 else
-  echo >&2 "${red}[Javascript Style][Fatal]: Please, install jshint via npm\n"
+  echo >&2 "${red}[Javascript Style][Fatal]: Please, install jshint via npm\n${grey}"
   errors=true
 fi
 
@@ -83,7 +83,7 @@ if bundle exec rubocop -v >/dev/null 2>&1; then
 
   check_files_with_linter "$files" "rubocop" "Ruby"
 else
-  echo >&2 "${red}[Ruby Style][Fatal]: Please, add rubocop gem to your Gemfile\n"
+  echo >&2 "${red}[Ruby Style][Fatal]: Please, add rubocop gem to your Gemfile\n${grey}"
   errors=true
 fi
 
