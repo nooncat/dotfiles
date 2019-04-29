@@ -1,0 +1,94 @@
+#!/bin/sh
+
+red='\033[0;31m'
+green='\033[0;32m'
+yellow='\033[0;33m'
+blue='\033[0;34m'
+grey='\033[0m'
+
+errors=false
+
+echo "${green}Running Git pre-commit hook...${grey}\n"
+
+check_files_with_linter () {
+  echo "${green}[$3 Style][Info]: Checking $3 style with $2${grey}"
+
+  if [ -n "$1" ]; then
+    echo "${green}[$3 Style][Info]: Files to check:\n${blue}$1${grey}"
+
+    # Run linter for passed files
+    bundle exec "$2" $1
+
+    if [ $? -ne 0 ]; then
+      echo "${red}[$3 Style][Error]: Please, fix the issues and commit again${grey}\n"
+      errors=true
+    else
+      echo "${green}[$3 Style][Info]: Checking passed\n"
+    fi
+  else
+    echo "${green}[$3 Style][Info]: No files to check${grey}\n"
+  fi
+}
+
+
+# Slim-lint
+
+# Check if slim-lint is installed for the current project
+if bundle exec slim-lint -v >/dev/null 2>&1; then
+  # Check config file existence
+  if [ ! -f '.slim-lint.yml' ]; then
+    echo "${yellow}[Slim Style][Warning]: No .slim-lint.yml config file.${grey}"
+  fi
+
+  # Get only the staged slim files
+  slim_files="$(git diff --cached --name-only --diff-filter=AMC app/views/)"
+
+  check_files_with_linter "$slim_files" "slim-lint" "Slim"
+else
+  echo >&2 "${red}[Slim Style][Fatal]: Please, add slim-lint gem to your Gemfile\n"
+  errors=true
+fi
+
+
+# JSHint
+
+# Check if JSHint is installed
+if bundle exec jshint -v >/dev/null 2>&1; then
+  # Check config file existence
+  if [ ! -f '.jshintrc' ]; then
+    echo "${yellow}[Javascript Style][Warning]: No .jshintrc config file.${grey}"
+  fi
+
+  # Get only the staged javascript files
+  js_files="$(git diff --cached --name-only --diff-filter=AMC app/assets/javascripts/)"
+
+  check_files_with_linter "$js_files" "jshint" "Javascript"
+else
+  echo >&2 "${red}[Javascript Style][Fatal]: Please, install jshint via npm\n"
+  errors=true
+fi
+
+
+# Rubocop
+
+# Check if Rubocop is installed for the current project
+if bundle exec rubocop -v >/dev/null 2>&1; then
+  # Check config file existence
+  if [ ! -f '.rubocop.yml' ]; then
+    echo "${yellow}[Ruby Style][Warning]: No .rubocop.yml config file.${grey}"
+  fi
+
+  # Get only the staged files
+  files="$(git diff --cached --name-only --diff-filter=AMC)"
+
+  check_files_with_linter "$files" "rubocop" "Ruby"
+else
+  echo >&2 "${red}[Ruby Style][Fatal]: Please, add rubocop gem to your Gemfile\n"
+  errors=true
+fi
+
+if [ "$errors" = true ]; then
+  exit 1
+fi
+
+exit 0
