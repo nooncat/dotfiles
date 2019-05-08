@@ -10,7 +10,7 @@ errors=false
 
 echo "${green}Running Git pre-commit hook...\n${grey}"
 
-# Arguments [type, files, linter, options]
+# Arguments [type, files, linter_command, linter_options]
 check_files_with_linter () {
   echo "${green}[$1 Style][Info]: Checking $1 style with $3${grey}"
 
