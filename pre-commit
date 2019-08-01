@@ -14,7 +14,7 @@ echo "${green}Running Git pre-commit hook...\n${grey}"
 check_files_with_linter () {
   echo "${green}[$1 Style][Info]: Checking $1 style with $3${grey}"
 
-  if [ -n "$1" ]; then
+  if [ -n "$2" ]; then
     echo "${green}[$1 Style][Info]: Files to check:\n${blue}$2${grey}"
 
     # Run linter for passed files
@@ -51,21 +51,40 @@ else
 fi
 
 
-# JSHint
+# # JSHint
+#
+# # Check if JSHint is installed
+# if bundle exec jshint -v >/dev/null 2>&1; then
+#   # Check config file existence
+#   if [ ! -f '.jshintrc' ]; then
+#     echo "${yellow}[Javascript Style][Warning]: No .jshintrc config file.${grey}"
+#   fi
+#
+#   # Get only the staged javascript files
+#   js_files="$(git diff --cached --name-only --diff-filter=AMC app/assets/javascripts/)"
+#
+#   check_files_with_linter "Javascript" "$js_files" "jshint"
+# else
+#   echo >&2 "${red}[Javascript Style][Fatal]: Please, install jshint via npm\n${grey}"
+#   errors=true
+# fi
 
-# Check if JSHint is installed
-if bundle exec jshint -v >/dev/null 2>&1; then
+
+# Coffeelint
+
+# Check if Coffelint is installed
+if bundle exec coffeelint -v >/dev/null 2>&1; then
   # Check config file existence
-  if [ ! -f '.jshintrc' ]; then
-    echo "${yellow}[Javascript Style][Warning]: No .jshintrc config file.${grey}"
+  if [ ! -f '.coffeelint.json' ]; then
+    echo "${yellow}[Coffeescript Style][Warning]: No .coffeelint.json config file.${grey}"
   fi
 
-  # Get only the staged javascript files
-  js_files="$(git diff --cached --name-only --diff-filter=AMC app/assets/javascripts/)"
+  # Get only the staged coffeescript files
+  coffee_files="$(git diff --cached --name-only --diff-filter=AMC app/assets/javascripts/)"
 
-  check_files_with_linter "Javascript" "$js_files" "jshint"
+  check_files_with_linter "Coffeescript" "$coffee_files" "coffeelint"
 else
-  echo >&2 "${red}[Javascript Style][Fatal]: Please, install jshint via npm\n${grey}"
+  echo >&2 "${red}[Coffeescript Style][Fatal]: Please, install coffeelint via npm\n${grey}"
   errors=true
 fi
 
