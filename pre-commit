@@ -46,7 +46,7 @@ if bundle exec slim-lint -v >/dev/null 2>&1; then
 
   check_files_with_linter "Slim" "$slim_files" "slim-lint"
 else
-  echo >&2 "${red}[Slim Style][Fatal]: Please, add slim-lint gem to your Gemfile\n${grey}"
+  echo >&2 "${red}[Slim Style][Fatal]: Please, add 'slim_lint' gem to Gemfile\n${grey}"
   errors=true
 fi
 
@@ -65,7 +65,7 @@ fi
 #
 #   check_files_with_linter "Javascript" "$js_files" "jshint"
 # else
-#   echo >&2 "${red}[Javascript Style][Fatal]: Please, install jshint via npm\n${grey}"
+#   echo >&2 "${red}[Javascript Style][Fatal]: Please, install 'jshint' via npm\n${grey}"
 #   errors=true
 # fi
 
@@ -84,7 +84,7 @@ if bundle exec coffeelint -v >/dev/null 2>&1; then
 
   check_files_with_linter "Coffeescript" "$coffee_files" "coffeelint"
 else
-  echo >&2 "${red}[Coffeescript Style][Fatal]: Please, install coffeelint via npm\n${grey}"
+  echo >&2 "${red}[Coffeescript Style][Fatal]: Please, install 'coffeelint' via npm or add 'coffeelint' gem to Gemfile\n${grey}"
   errors=true
 fi
 
@@ -103,7 +103,7 @@ if bundle exec rubocop -v >/dev/null 2>&1; then
 
   check_files_with_linter  "Ruby" "$files" "rubocop" "--force-exclusion"
 else
-  echo >&2 "${red}[Ruby Style][Fatal]: Please, add rubocop gem to your Gemfile\n${grey}"
+  echo >&2 "${red}[Ruby Style][Fatal]: Please, add 'rubocop' gem to Gemfile\n${grey}"
   errors=true
 fi
 
