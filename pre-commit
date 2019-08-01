@@ -99,7 +99,7 @@ if bundle exec rubocop -v >/dev/null 2>&1; then
   fi
 
   # Get only the staged files
-  files="$(git diff --cached --name-only --diff-filter=AMC)"
+  files="$(git diff --cached --name-only --diff-filter=AMC -- . ':!app/assets/' ':!app/views/')"
 
   check_files_with_linter  "Ruby" "$files" "rubocop" "--force-exclusion"
 else
