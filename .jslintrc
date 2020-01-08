@@ -1,0 +1,9 @@
+{
+  "predef": [
+    "document",
+    "window",
+    "jQuery",
+    "$",
+    "evil"
+  ]
+}

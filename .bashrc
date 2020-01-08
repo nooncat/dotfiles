@@ -133,7 +133,7 @@ source /home/kom/.rvm/scripts/rvm
 export PATH="$PATH:$HOME/.rvm/bin"
 
 # function to set terminal title
-function set-title(){
+function setit(){
   if [[ -z "$ORIG" ]]; then
     ORIG=$PS1
   fi
