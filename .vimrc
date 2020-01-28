@@ -42,7 +42,7 @@ Plugin 'gregsexton/MatchTag'
 "Plugin 'tpope/vim-repeat'
 "Plugin 'tpope/vim-surround'
 "Plugin 'burnettk/vim-angular'
-Plugin 'lyokha/vim-xkbswitch' " http://www.pvsm.ru/vim/31398/print/ not work
+"Plugin 'lyokha/vim-xkbswitch' " http://www.pvsm.ru/vim/31398/print/ not work
 "https://github.com/ierton/xkb-switch/issues/15 not working because gnome-terminal bug
 "using only for showing current keyboard layout in vim-airline
 
@@ -57,11 +57,12 @@ set lazyredraw
 set ttyfast
 set ttyscroll=3
 set mouse=a
+set clipboard=unnamedplus
 
 "this was before gnome-terminal 3.18.3
 "if system("gconftool-2 --get '/apps/gnome-terminal/profiles/Default/background_color'") == "#fdfdf6f6e3e3\n"
 
-if system("gsettings get 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' background-color") == "'#fdfdf6f6e3e3'\n"
+if system("gsettings get 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:beb1648a-3560-4e1f-93eb-a14f3c501e34/' background-color") == "'#fdfdf6f6e3e3'\n"
   set background=light
 else
   set background=dark
@@ -241,6 +242,8 @@ nnoremap <silent> <leader>g :<C-u>Unite buffer<CR>
 " Ctrl-l unite_redraw / clear cache
 
 "let g:XkbSwitchEnabled = 1
+"let g:XkbSwitchLib = '/usr/local/lib/libg3kbswitch.so'
+"let g:XkbSwitchIMappings = ['ru']
 
 " for russian key map in linux without GUI
 "set keymap=russian-jcukenwin
