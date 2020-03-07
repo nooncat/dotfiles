@@ -224,6 +224,9 @@ let g:ale_echo_msg_format = '[%linter%] [%severity%] %s'
 
 let g:gitgutter_map_keys = 0
 set updatetime=300
+" lower priority for preventing overiding ale signs
+let g:gitgutter_sign_priority = 9
+
 
 let g:EasyMotion_do_mapping = 0
 nmap s <Plug>(easymotion-s2)
