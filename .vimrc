@@ -51,7 +51,7 @@ filetype plugin indent on
 "set omnifunc=syntaxcomplete#Complete
 
 set regexpengine=1    "for Vim version > 7.3.969
-syntax enable         "must be above colorsetting block
+syntax enable         "should be above colorsetting block
 set lazyredraw
 "set synmaxcol=80
 set ttyfast
@@ -85,8 +85,12 @@ set undodir=~/.vim/undo/
 
 set scrolloff=4
 "set scrolljump=3
+
 set number
 noremap <F2> :set invnumber<CR>
+" remove underline from current line number highlighting
+hi CursorLineNr cterm=none
+
 set title
 set nobackup
 set noswapfile
@@ -272,9 +276,9 @@ augroup vimrc_autocmd
 
   " for Ubuntu >= 15
   " https://askubuntu.com/questions/731774/how-to-change-gnome-terminal-profile-preferences-using-dconf-or-gsettings
-  au InsertEnter * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' cursor-shape ibeam"
-  au InsertLeave * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' cursor-shape block"
-  au VimLeave * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' cursor-shape block"
+  au InsertEnter * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:beb1648a-3560-4e1f-93eb-a14f3c501e34/' cursor-shape ibeam"
+  au InsertLeave * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:beb1648a-3560-4e1f-93eb-a14f3c501e34/' cursor-shape block"
+  au VimLeave * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:beb1648a-3560-4e1f-93eb-a14f3c501e34/' cursor-shape block"
 
   "cursor for server linux
   "  autocmd InsertEnter * highlight CursorLine   ctermbg=233
