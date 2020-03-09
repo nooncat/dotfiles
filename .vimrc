@@ -20,7 +20,7 @@ Plugin 'tpope/vim-fugitive'
 "Plugin 'othree/javascript-libraries-syntax.vim'
 "Plugin 'othree/yajs.vim'
 Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
+Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'slim-template/vim-slim'
 Plugin 'jiangmiao/auto-pairs'
@@ -30,7 +30,6 @@ Plugin 'jiangmiao/auto-pairs'
 
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'rking/ag.vim'  " build from source https://github.com/ggreer/the_silver_searcher
-"Plugin 'mileszs/ack.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimproc.vim' " cd ~/.vim/bundle/vimproc.vim  make
 
@@ -183,8 +182,6 @@ let g:ag_mapping_message=0
 let g:ag_highlight=1
 nnoremap <leader>a :Ag!<space>
 nnoremap <leader>* :Ag! -Q <C-r>=expand('<cword>')<CR><CR>
-"nnoremap <leader>a :Ack!<space>
-"nnoremap <leader>* :Ack! -Q <C-r>=expand('<cword>')<CR><CR>
 
 nmap <leader>t :NERDTreeToggle<CR>
 "nmap <leader>r :NERDTreeFind<CR>
@@ -215,8 +212,8 @@ set laststatus=2
 
 let g:ale_linters = {
 \  'ruby':       ['rubocop', 'mri'],
-\  'javascript': ['jshint'],
-\  'slim':       ['slimlint']
+\  'slim':       ['slimlint'],
+\  'javascript': ['eslint']
 \}
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
