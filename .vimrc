@@ -29,7 +29,7 @@ Plugin 'jiangmiao/auto-pairs'
 "Plugin 'wting/gitsessions.vim'
 
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'wincent/ferret'  " build from source https://github.com/ggreer/the_silver_searcher
+Plugin 'wincent/ferret'  "sudo apt install silversearcher-ag
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimproc.vim' " cd ~/.vim/bundle/vimproc.vim  make
 
