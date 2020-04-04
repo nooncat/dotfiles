@@ -29,7 +29,7 @@ Plugin 'jiangmiao/auto-pairs'
 "Plugin 'wting/gitsessions.vim'
 
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'rking/ag.vim'  " build from source https://github.com/ggreer/the_silver_searcher
+Plugin 'wincent/ferret'  " build from source https://github.com/ggreer/the_silver_searcher
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimproc.vim' " cd ~/.vim/bundle/vimproc.vim  make
 
@@ -49,9 +49,9 @@ call vundle#end()
 filetype plugin indent on
 "set omnifunc=syntaxcomplete#Complete
 
-set regexpengine=1    "for Vim version > 7.3.969
+set regexpengine=1    "use old regexp engine for Vim version > 7.3.969
 syntax enable         "should be above colorsetting block
-set lazyredraw
+set lazyredraw        "improve scrolling performance
 "set synmaxcol=80
 set ttyfast
 set ttyscroll=3
@@ -128,6 +128,7 @@ set backspace=indent,eol,start
 set hlsearch
 set incsearch
 "set nowrapscan
+" set ignorecase smartcase  " ignore case only when the pattern contains no capital letters
 set ignorecase
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
 nnoremap * *N
@@ -178,10 +179,11 @@ function! RestoreCursorPos()
   endif
 endfunction
 
-let g:ag_mapping_message=0
-let g:ag_highlight=1
-nnoremap <leader>a :Ag!<space>
-nnoremap <leader>* :Ag! -Q <C-r>=expand('<cword>')<CR><CR>
+let g:FerretVeryMagic=0
+let g:FerretExecutable='ag'
+let g:FerretMap=0
+nnoremap <leader>a :Ack!<space>
+nnoremap <leader>* :Ack! -Q <C-r>=expand('<cword>')<CR><CR>
 
 nmap <leader>t :NERDTreeToggle<CR>
 "nmap <leader>r :NERDTreeFind<CR>
