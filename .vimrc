@@ -252,7 +252,8 @@ nnoremap <silent> <leader>g :<C-u>Unite buffer<CR>
 
 let g:XkbSwitchEnabled = 1
 let g:XkbSwitchLib = '/usr/local/lib/libg3kbswitch.so'
-let g:XkbSwitchIMappings = ['ru']
+"let g:XkbSwitchIMappings = ['ru'] "not working and conflicting with ferret
+                                   "mapping on global search
 
 " for russian key map in linux without GUI
 "set keymap=russian-jcukenwin
