@@ -1,0 +1,34 @@
+# /home/kom/.config/fusuma/config.yml
+
+swipe:
+  3:
+    left:
+      command: 'xdotool key alt+Shift+Tab'
+    right:
+      command: 'xdotool key alt+Tab'
+    up:
+      command: 'xdotool key super'
+    down:
+      command: 'xdotool key super'
+  4:
+    left:
+      command: 'xdotool key super+Page_Up'
+    right:
+      command: 'xdotool key super+Page_Down'
+    up:
+      command: 'xdotool key F5'
+    down:
+      command: 'xdotool key F5'
+pinch:
+  in:
+    command:
+  out:
+     command:
+
+threshold:
+  swipe: 1
+  pinch: 1
+
+interval:
+  swipe: 0.5
+  pinch: 0.5
