@@ -28,6 +28,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'slim-template/vim-slim'
+Plugin 'evanleck/vim-svelte'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'tpope/vim-endwise'
 
@@ -64,7 +65,7 @@ set clipboard=unnamedplus
 "this was before gnome-terminal 3.18.3
 "if system("gconftool-2 --get '/apps/gnome-terminal/profiles/Default/background_color'") == "#fdfdf6f6e3e3\n"
 
-if system("gsettings get 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:beb1648a-3560-4e1f-93eb-a14f3c501e34/' background-color") == "'#fdfdf6f6e3e3'\n"
+if system("gsettings get 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' background-color") == "'#fdfdf6f6e3e3'\n"
   set background=light
 else
   set background=dark
@@ -106,6 +107,8 @@ set listchars=trail:·,tab:>-,nbsp:┄   ",eol:¬
 set pastetoggle=<F4>
 " turn off record mode
 map q <Nop>
+
+"set tags=~/.vimtags
 
 set wildmenu
 set wildmode=longest:full,full
@@ -282,9 +285,9 @@ augroup vimrc_autocmd
 
   " for Ubuntu >= 15
   " https://askubuntu.com/questions/731774/how-to-change-gnome-terminal-profile-preferences-using-dconf-or-gsettings
-  au InsertEnter * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:beb1648a-3560-4e1f-93eb-a14f3c501e34/' cursor-shape ibeam"
-  au InsertLeave * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:beb1648a-3560-4e1f-93eb-a14f3c501e34/' cursor-shape block"
-  au VimLeave * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:beb1648a-3560-4e1f-93eb-a14f3c501e34/' cursor-shape block"
+  au InsertEnter * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' cursor-shape ibeam"
+  au InsertLeave * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' cursor-shape block"
+  au VimLeave * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' cursor-shape block"
 
   "cursor for server linux
   "  autocmd InsertEnter * highlight CursorLine   ctermbg=233
