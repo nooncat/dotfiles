@@ -145,6 +145,9 @@ nnoremap <leader>s :shell<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 
+nnoremap <leader>cs :let @+=@%<CR>
+nnoremap <leader>cl :let @+=expand("%:p")<CR>
+
 xnoremap p pgvy
 nnoremap j gj
 nnoremap k gk
