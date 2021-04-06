@@ -48,6 +48,7 @@ Plugin 'gregsexton/MatchTag'
 "Plugin 'tpope/vim-surround'
 "Plugin 'burnettk/vim-angular'
 Plugin 'lyokha/vim-xkbswitch' " http://www.pvsm.ru/vim/31398/print/   options g:XkbSwitchIMappings = ['ru'] not working
+Plugin 'nathanaelkane/vim-indent-guides'
 
 call vundle#end()
 filetype plugin indent on
@@ -106,7 +107,7 @@ set list
 set listchars=trail:·,tab:>-,nbsp:┄   ",eol:¬
 set pastetoggle=<F4>
 " turn off record mode
-map q <Nop>
+" map q <Nop>
 
 "set tags=~/.vimtags
 
@@ -228,7 +229,7 @@ let g:ale_linters = {
 \}
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] [%severity%] %s'
+let g:ale_echo_msg_format = '[%linter%] [%severity%] [%code%] %s'
 
 let g:gitgutter_map_keys = 0
 set updatetime=300
