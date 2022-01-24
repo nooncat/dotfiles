@@ -28,6 +28,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'slim-template/vim-slim'
+Plugin 'evanleck/vim-svelte'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'tpope/vim-endwise'
 
@@ -47,6 +48,7 @@ Plugin 'gregsexton/MatchTag'
 "Plugin 'tpope/vim-surround'
 "Plugin 'burnettk/vim-angular'
 Plugin 'lyokha/vim-xkbswitch' " http://www.pvsm.ru/vim/31398/print/   options g:XkbSwitchIMappings = ['ru'] not working
+Plugin 'nathanaelkane/vim-indent-guides'
 
 call vundle#end()
 filetype plugin indent on
@@ -64,7 +66,7 @@ set clipboard=unnamedplus
 "this was before gnome-terminal 3.18.3
 "if system("gconftool-2 --get '/apps/gnome-terminal/profiles/Default/background_color'") == "#fdfdf6f6e3e3\n"
 
-if system("gsettings get 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:beb1648a-3560-4e1f-93eb-a14f3c501e34/' background-color") == "'#fdfdf6f6e3e3'\n"
+if system("gsettings get 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' background-color") == "'#fdfdf6f6e3e3'\n"
   set background=light
 else
   set background=dark
@@ -105,7 +107,9 @@ set list
 set listchars=trail:·,tab:>-,nbsp:┄   ",eol:¬
 set pastetoggle=<F4>
 " turn off record mode
-map q <Nop>
+" map q <Nop>
+
+"set tags=~/.vimtags
 
 set wildmenu
 set wildmode=longest:full,full
@@ -141,6 +145,9 @@ let mapleader = ","
 nnoremap <leader>s :shell<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
+
+nnoremap <leader>cs :let @+=@%<CR>
+nnoremap <leader>cl :let @+=expand("%:p")<CR>
 
 xnoremap p pgvy
 nnoremap j gj
@@ -222,7 +229,7 @@ let g:ale_linters = {
 \}
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] [%severity%] %s'
+let g:ale_echo_msg_format = '[%linter%] [%severity%] [%code%] %s'
 
 let g:gitgutter_map_keys = 0
 set updatetime=300
@@ -231,7 +238,8 @@ let g:gitgutter_sign_priority = 9
 
 
 let g:EasyMotion_do_mapping = 0
-nmap s <Plug>(easymotion-s2)
+nmap s <Plug>(easymotion-overwin-f2)
+nmap <Leader>l <Plug>(easymotion-overwin-line)
 let g:EasyMotion_use_upper = 1
 let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
 let g:EasyMotion_smartcase=1
@@ -282,9 +290,9 @@ augroup vimrc_autocmd
 
   " for Ubuntu >= 15
   " https://askubuntu.com/questions/731774/how-to-change-gnome-terminal-profile-preferences-using-dconf-or-gsettings
-  au InsertEnter * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:beb1648a-3560-4e1f-93eb-a14f3c501e34/' cursor-shape ibeam"
-  au InsertLeave * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:beb1648a-3560-4e1f-93eb-a14f3c501e34/' cursor-shape block"
-  au VimLeave * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:beb1648a-3560-4e1f-93eb-a14f3c501e34/' cursor-shape block"
+  au InsertEnter * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' cursor-shape ibeam"
+  au InsertLeave * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' cursor-shape block"
+  au VimLeave * silent execute "!gsettings set 'org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/' cursor-shape block"
 
   "cursor for server linux
   "  autocmd InsertEnter * highlight CursorLine   ctermbg=233
