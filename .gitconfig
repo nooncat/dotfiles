@@ -19,3 +19,12 @@
 [http]
 	sslCAinfo = /etc/ssl/certs/ca-certificates.crt
 	sslverify = true
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+
+
+[includeIf "gitdir:~/projects/jet_rockets/"]
+  path = ~/projects/jet_rockets/.gitconfig
