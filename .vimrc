@@ -22,11 +22,14 @@ Plugin 'w0rp/ale'
 Plugin 'nooncat/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+"Plugin 'tommcdo/vim-fugitive-blame-ext' not working
 "Plugin 'othree/javascript-libraries-syntax.vim'
 "Plugin 'othree/yajs.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'leafgarland/typescript-vim'
+"Plugin 'jparise/vim-graphq' can't install: requesting github authentication
 Plugin 'slim-template/vim-slim'
 Plugin 'evanleck/vim-svelte'
 Plugin 'jiangmiao/auto-pairs'
@@ -54,7 +57,7 @@ call vundle#end()
 filetype plugin indent on
 "set omnifunc=syntaxcomplete#Complete
 
-set regexpengine=1    "use old regexp engine for Vim version > 7.3.969
+set regexpengine=0
 syntax enable         "should be above colorsetting block
 set lazyredraw        "improve scrolling performance
 "set synmaxcol=80
@@ -125,7 +128,7 @@ set smartindent
 "set columns=80
 set wrap
 set linebreak
-let &colorcolumn=join(range(101,999),",")
+let &colorcolumn=join(range(121,999),",")
 
 set breakindent
 set showbreak=\ \ " comment  so that the whitespace work >.>
