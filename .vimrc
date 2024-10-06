@@ -31,7 +31,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'leafgarland/typescript-vim'
 "Plugin 'jparise/vim-graphq' can't install: requesting github authentication
 Plugin 'slim-template/vim-slim'
-Plugin 'evanleck/vim-svelte'
+"Plugin 'evanleck/vim-svelte'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'tpope/vim-endwise'
 
@@ -52,6 +52,7 @@ Plugin 'gregsexton/MatchTag'
 "Plugin 'burnettk/vim-angular'
 Plugin 'lyokha/vim-xkbswitch' " http://www.pvsm.ru/vim/31398/print/   options g:XkbSwitchIMappings = ['ru'] not working
 Plugin 'nathanaelkane/vim-indent-guides'
+"Plugin 'stevearc/vim-arduino'
 
 call vundle#end()
 filetype plugin indent on
@@ -209,6 +210,17 @@ let g:airline_theme = 'luna'
 let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_skip_empty_sections = 1 " for hiding after ale checking finish
+let g:airline#extensions#ale#checking_symbol="Æ"
+
+let g:airline_symbols = {}
+"let g:airline_symbols.readonly = ''
+"let g:airline_symbols.dirty='⚡'
+"let g:airline_symbols.branch = ''
+let g:airline_symbols.linenr = ' L:'
+let g:airline_symbols.maxlinenr = ' S:'
+let g:airline_symbols.colnr = ''
+
 " https://github.com/vim-airline/vim-airline/issues/1880#issuecomment-468644843
 " fix branch section hiding, changed to 100
 let g:airline#extensions#branch#displayed_head_limit = 12
