@@ -1,8 +1,8 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-# run new gnome-tab(window) with same cwd:
-#. /etc/profile.d/vte.sh
+
+
 
 # If not running interactively, don't do anything
 case $- in
@@ -39,7 +39,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+    xterm-color|*-256color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -86,6 +86,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
@@ -125,13 +128,6 @@ alias g='git'
 source /usr/share/bash-completion/completions/git
 complete -o default -o nospace -F _git g
 
-EDITOR=vim
-
-source /home/kom/.rvm/scripts/rvm
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
 # function to set terminal title
 function setit(){
   if [[ -z "$ORIG" ]]; then
@@ -140,3 +136,22 @@ function setit(){
   TITLE="\[\e]2;$*\a\]"
   PS1=${ORIG}${TITLE}
 }
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# Load RVM into a shell session *as a function*
+
+# The next line updates PATH for Yandex Cloud CLI.
+if [ -f '/home/kom/yandex-cloud/path.bash.inc' ]; then source '/home/kom/yandex-cloud/path.bash.inc'; fi
+
+# The next line enables shell command completion for yc.
+if [ -f '/home/kom/yandex-cloud/completion.bash.inc' ]; then source '/home/kom/yandex-cloud/completion.bash.inc'; fi
+
+export EDITOR="vim"
+
