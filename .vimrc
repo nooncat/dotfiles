@@ -59,6 +59,8 @@ Plugin 'lyokha/vim-xkbswitch' " http://www.pvsm.ru/vim/31398/print/   options g:
 Plugin 'nathanaelkane/vim-indent-guides'
 "Plugin 'stevearc/vim-arduino'
 
+"Plugin 'ryanoasis/vim-devicons'
+
 call vundle#end()
 
 filetype plugin indent on
@@ -287,6 +289,33 @@ let g:fuzzyy_keymaps = {
 \     'delete_prefix': [],
 \     'exit': ["\<Esc>","\<c-c>","\<c-[>"]
 \ }
+let g:fuzzyy_window_layout = {
+\    'FuzzyFiles': {
+\        'preview': 1,
+\        'preview_ratio': 0.5,
+\        'width': 0.9,
+\    },
+\    'FuzzyGrep': {
+\        'preview': 1,
+\        'preview_ratio': 0.5,
+\        'width': 0.9,
+\    },
+\    'FuzzyBuffers': {
+\        'preview': 1,
+\        'preview_ratio': 0.5,
+\        'width': 0.9,
+\    },
+\    'FuzzyMRUFiles': {
+\        'preview': 1,
+\        'preview_ratio': 0.5,
+\        'width': 0.9,
+\    },
+\    'FuzzyHighlights': {
+\        'preview': 1,
+\        'preview_ratio': 0.7,
+\        'width': 0.9,
+\    },
+\}
 
 let g:XkbSwitchEnabled = 1
 let g:XkbSwitchLib = '/usr/local/lib/libg3kbswitch.so'
