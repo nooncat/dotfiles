@@ -271,6 +271,7 @@ let g:EasyMotion_use_smartsign_us = 1
 let g:UltiSnipsExpandTrigger="<c-j>"
 "let g:UltiSnipsUsePythonVersion = 2  "cygwin ycm+ultisnips fixing
 
+let g:files_respect_gitignore = 1
 let g:fuzzyy_keymaps = {
 \     'menu_up': ["\<c-p>", "\<Up>"],
 \     'menu_down': ["\<c-n>", "\<Down>"],
