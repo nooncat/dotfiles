@@ -4,6 +4,7 @@ set termencoding=utf-8
 
 set nocompatible
 filetype off
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -17,12 +18,15 @@ Plugin 'tpope/vim-bundler'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+
 " check ale others functions
 Plugin 'w0rp/ale'
 Plugin 'nooncat/vim-colors-solarized'
+
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 "Plugin 'tommcdo/vim-fugitive-blame-ext' not working
+"
 "Plugin 'othree/javascript-libraries-syntax.vim'
 "Plugin 'othree/yajs.vim'
 Plugin 'pangloss/vim-javascript'
@@ -32,6 +36,7 @@ Plugin 'leafgarland/typescript-vim'
 "Plugin 'jparise/vim-graphq' can't install: requesting github authentication
 Plugin 'slim-template/vim-slim'
 "Plugin 'evanleck/vim-svelte'
+"
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'tpope/vim-endwise'
 
@@ -39,8 +44,8 @@ Plugin 'jiangmiao/auto-pairs'
 
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'wincent/ferret'  " build from source https://github.com/ggreer/the_silver_searcher#building-a-release-tarball
-Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/vimproc.vim' " cd ~/.vim/bundle/vimproc.vim  make
+
+Plugin 'Donaldttt/fuzzyy'
 
 Plugin 'Valloric/YouCompleteMe'  "cd ~/.vim/bundle/YouCompleteMe  ./install.py
 Plugin 'honza/vim-snippets'
@@ -55,6 +60,7 @@ Plugin 'nathanaelkane/vim-indent-guides'
 "Plugin 'stevearc/vim-arduino'
 
 call vundle#end()
+
 filetype plugin indent on
 "set omnifunc=syntaxcomplete#Complete
 
@@ -245,12 +251,12 @@ let g:ale_linters = {
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] [%severity%] [%code%] %s'
+let g:ale_virtualtext_cursor = 'current'
 
 let g:gitgutter_map_keys = 0
 set updatetime=300
 " lower priority for preventing overiding ale signs
 let g:gitgutter_sign_priority = 9
-
 
 let g:EasyMotion_do_mapping = 0
 nmap s <Plug>(easymotion-overwin-f2)
@@ -265,18 +271,28 @@ let g:EasyMotion_use_smartsign_us = 1
 let g:UltiSnipsExpandTrigger="<c-j>"
 "let g:UltiSnipsUsePythonVersion = 2  "cygwin ycm+ultisnips fixing
 
-let g:unite_winheight = 35
-let g:unite_split_rule = 'botright'
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup', '-g', '']
-nnoremap <leader>f :<C-u>Unite -start-insert file_rec/async:!<CR>
-nnoremap <silent> <leader>g :<C-u>Unite buffer<CR>
-" Ctrl-l unite_redraw / clear cache
+let g:fuzzyy_keymaps = {
+\     'menu_up': ["\<c-p>", "\<Up>"],
+\     'menu_down': ["\<c-n>", "\<Down>"],
+\     'menu_select': ["\<CR>"],
+\     'preview_up': ["\<c-i>"],
+\     'preview_down': ["\<c-f>"],
+\     'preview_up_half_page': ["\<c-u>"],
+\     'preview_down_half_page': ["\<c-d>"],
+\     'cursor_begining': ["\<c-a>"],
+\     'cursor_end': ["\<c-e>"],
+\     'backspace': ["\<bs>", "\<c-h>"],
+\     'delete_all': ["\<c-k>"],
+\     'delete_prefix': [],
+\     'exit': ["\<Esc>","\<c-c>","\<c-[>"]
+\ }
 
 let g:XkbSwitchEnabled = 1
 let g:XkbSwitchLib = '/usr/local/lib/libg3kbswitch.so'
 "let g:XkbSwitchIMappings = ['ru'] "not working and conflicting with ferret
                                    "mapping on global search
+
+let g:indent_guides_enable_on_vim_startup = 1
 
 " for russian key map in linux without GUI
 "set keymap=russian-jcukenwin
