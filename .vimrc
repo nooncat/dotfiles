@@ -323,6 +323,7 @@ let g:XkbSwitchLib = '/usr/local/lib/libg3kbswitch.so'
                                    "mapping on global search
 
 let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size=1
 
 " for russian key map in linux without GUI
 "set keymap=russian-jcukenwin
