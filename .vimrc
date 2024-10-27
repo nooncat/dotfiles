@@ -27,6 +27,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 "Plugin 'tommcdo/vim-fugitive-blame-ext' not working
 "
+Plugin 'yggdroot/indentline'
 "Plugin 'othree/javascript-libraries-syntax.vim'
 "Plugin 'othree/yajs.vim'
 Plugin 'pangloss/vim-javascript'
@@ -56,11 +57,10 @@ Plugin 'gregsexton/MatchTag'
 "Plugin 'tpope/vim-surround'
 "Plugin 'burnettk/vim-angular'
 Plugin 'lyokha/vim-xkbswitch' " http://www.pvsm.ru/vim/31398/print/   options g:XkbSwitchIMappings = ['ru'] not working
-Plugin 'nathanaelkane/vim-indent-guides'
+
 "Plugin 'stevearc/vim-arduino'
 
 "Plugin 'ryanoasis/vim-devicons'
-
 call vundle#end()
 
 filetype plugin indent on
@@ -85,8 +85,7 @@ else
 endif
 
 set t_Co=16
-"let g:solarized_termcolors=256 "comment for Cygwin & gnome-terminal
-colorscheme solarized   "bug sets background to light in fbterm
+colorscheme solarized
 call togglebg#map("<F3>")
 " unmap default plugin's toggle mapping    it's bug: should unmap with plugin
 iunmap <F5>
@@ -319,11 +318,10 @@ let g:fuzzyy_window_layout = {
 
 let g:XkbSwitchEnabled = 1
 let g:XkbSwitchLib = '/usr/local/lib/libg3kbswitch.so'
-"let g:XkbSwitchIMappings = ['ru'] "not working and conflicting with ferret
-                                   "mapping on global search
+"let g:XkbSwitchIMappings = ['ru'] "not working and conflicting with ferret mapping on global search
 
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_guide_size=1
+let g:indentLine_char = '┊'
+let g:indentLine_enabled = 1
 
 " for russian key map in linux without GUI
 "set keymap=russian-jcukenwin
