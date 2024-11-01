@@ -25,8 +25,9 @@ Plugin 'nooncat/vim-colors-solarized'
 
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
-"Plugin 'tommcdo/vim-fugitive-blame-ext' not working
-"
+Plugin 'tpope/vim-rhubarb'
+Plugin 'junegunn/gv.vim'
+
 Plugin 'yggdroot/indentline'
 "Plugin 'othree/javascript-libraries-syntax.vim'
 "Plugin 'othree/yajs.vim'
@@ -258,6 +259,11 @@ let g:gitgutter_map_keys = 0
 set updatetime=300
 " lower priority for preventing overiding ale signs
 let g:gitgutter_sign_priority = 9
+nmap <leader>hn <Plug>(GitGutterNextHunk)
+nmap <leader>hp <Plug>(GitGutterPrevHunk)
+nmap <leader>hs <Plug>(GitGutterStageHunk)
+nmap <leader>hu <Plug>(GitGutterUndoHunk)
+nmap <leader>hq <Plug>(GitGutterPreviewHunk)
 
 let g:EasyMotion_do_mapping = 0
 nmap s <Plug>(easymotion-overwin-f2)
